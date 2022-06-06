@@ -163,3 +163,60 @@ input, textarea{
 }
 
 /* Contact Form End */
+
+/* envelop start */
+
+.envelop{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition-duration: 3s;
+}
+
+.feedback_form{
+  background-color: rgb(204, 204, 204);
+  width: 60%;
+  height: 55vw;
+  position:absolute;
+  top: 15vw;
+  z-index: 3;
+  transform: rotateZ(-3deg);
+  transition: all ease-in 600ms;
+}
+
+.env-top-total{
+  width:75%;
+  height:60vw;
+  position: relative;
+  top: 30vw;
+  transition-duration: 2s;
+  transition: all ease-out 1000ms;
+  transform-style: preserve-3d;
+}
+.env-top{
+  height: 50%;
+  background-color: aqua;
+}
+
+.env-top-invisible{
+  height:50%;
+  background-color: transparent;
+}
+
+.env-back{
+  width: 75%;
+  height: 60vw;
+  background-color: blue;
+}
+
+.open-envelop{
+  width: 75%;
+  height: 60vw;
+  position: relative;
+  top: -60vw;
+  z-index:5;
+}
+
+/* envelop end */
