@@ -78,6 +78,7 @@
   list-style: none;
   display: flex;
   margin-right: 10vw;
+  list-style-type: none;
 }
 
 .nav-li{
@@ -88,13 +89,14 @@
   padding: 3px;
 }
 
-.nav-li:hover{
-  background-color: white;
-  color: black;
+.navList{
+  color:white;
+  text-decoration: none;
 }
 
-:link{
-  color:white;
+.navList:hover{
+  background-color: white;
+  color: black;
 }
 
 .footer{
@@ -151,8 +153,6 @@
 /* Contact form start */
 
 form{
-  display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
@@ -177,27 +177,39 @@ input, textarea{
 
 .feedback_form{
   background-color: rgb(204, 204, 204);
-  width: 60%;
-  height: 55vw;
+  width: 45vw;
+  height: 35vh;
   position:absolute;
-  top: 15vw;
+  top: 0vh;
   z-index: 3;
   transform: rotateZ(-3deg);
   transition: all ease-in 600ms;
 }
 
+input[type=text] {
+  border: none;
+  background-color: rgb(204, 204, 204);
+  border-bottom: 2px solid red;
+}
+
+input[type=text]:focus {
+  border: none;
+  background-color: rgb(204, 204, 204);
+  border-bottom: 2px solid yellow;
+}
+
 .env-top-total{
-  width:75%;
-  height:60vw;
+  width:50vw;
+  height:40vh;
   position: relative;
-  top: 30vw;
+  top: 20vh;
   transition-duration: 2s;
   transition: all ease-out 1000ms;
   transform-style: preserve-3d;
 }
 .env-top{
   height: 50%;
-  background-color: aqua;
+  width: 100%;
 }
 
 .env-top-invisible{
@@ -206,16 +218,17 @@ input, textarea{
 }
 
 .env-back{
-  width: 75%;
-  height: 60vw;
-  background-color: blue;
+  width: 50vw;
+  height: 40vh;
+  background-color: #267b9e;
+  border-radius: 0px 0px 20px 20px;
 }
 
 .open-envelop{
-  width: 75%;
-  height: 60vw;
+  width: 50vw;
+  height: 40vh;
   position: relative;
-  top: -60vw;
+  top: -40vh;
   z-index:5;
 }
 
