@@ -1,0 +1,21 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 12
+    commands:
+      #install project dependencies
+      -npm install
+    
+      #upgrade AWS CLI to the latest version
+      -pip3 install --upgrade awscli
+  pre_build:
+    commands:
+      -echo pre_build done
+  build:
+    commands:
+      -echo build done
+  post_build:
+    commands:
+      -echo post_build done
