@@ -1,0 +1,51 @@
+.gamecanvas{
+    position: absolute;
+}
+
+.coin{
+    width: 100px;
+    height: 40px;
+    border-radius: 10px;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    background-image: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
+    color: goldenrod;
+    font-size:larger;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.models{
+    height: 500px;
+    width:100px;
+    position:absolute;
+    background-color: aquamarine;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.model_button{
+    height:80px;
+    width:80px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.pine_tree{
+    background-image: url('../img/model_image/pine_tree.png');
+}
+
+.history_house{
+    background-image: url('../img/model_image/history_house.png');
+}
+
+.japan_house{
+    background-image: url('../img/model_image/japan_house.png');
+}
+
+.forest_house{
+    background-image: url('../img/model_image/forest_house.png');
+}

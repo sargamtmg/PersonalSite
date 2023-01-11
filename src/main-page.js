@@ -5,8 +5,9 @@ import AboutMe from './pages/About_me';
 import Contacts from './pages/Contact';
 import Hobby from './pages/Hobby';
 import Homepage from './pages/Homepage';
-import Skill from './pages/Skills'
-import Projects from './pages/Projects'
+import Skill from './pages/Skills';
+import Projects from './pages/Projects';
+import Game from './pages/Game';
 
 const MainPage = () => {
 
@@ -65,6 +66,7 @@ const MainPage = () => {
                 <Route path="/skill" element={<Skill />} />
                 <Route path="/projects" element={<Projects />} />
                 <Route path="/hobby" element={<Hobby />} />
+                <Route path="/Game" element={<Game />} />
                 <Route path="/contact" element={<Contacts />} />
                 <Route element={<Homepage/>} />
             </Routes>
