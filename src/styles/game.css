@@ -34,6 +34,12 @@
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+.active{
+    height: 90px;
+    width:90px;
+    box-shadow: 0.5px 0.5px 5px 2px  inset;
+}
 .pine_tree{
     background-image: url('../img/model_image/pine_tree.png');
 }

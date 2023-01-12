@@ -5,6 +5,10 @@ import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls'
 import {addAxis, addGrid} from '../utilities/helper'
 import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader' 
 
+//use of set to avoid model load at same location which also prevent from multiple loading -
+//of same model in same place which make less add of models causing better performance cause scene has less models.
+const occupiedLocation = new Set();
+
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth,window.innerHeight);
 const scene = new THREE.Scene();
@@ -59,7 +63,7 @@ const mousemove=(event)=>{
     intersects = raycaster.intersectObjects(scene.children);
     if(intersects.length){
         for(let i=0;i<intersects.length;i++){
-            if(intersects[i].object.name='plane'){
+            if(intersects[i].object.name === 'plane'){
                 hightlightpos = new THREE.Vector3().copy(intersects[i].point).floor().addScalar(0.5);
                 //console.log(hightlightpos);
                 hightlight.position.set(hightlightpos.x,0,hightlightpos.z);
@@ -90,26 +94,34 @@ const assestloader = new GLTFLoader();
 // });
 
 let meshs;
-const mousedown = ()=>{
+const mousedown = (setCoin)=>{
     console.log('mouse down');
-    console.log('intersects length : '+intersects.length);
-    if(intersects.length){
-        console.log('intersects');
-        for(let i=0;i<intersects.length;i++){
-            if(intersects[i].object.name='plane'){
-                if(meshs){
-                    console.log('meshs : '+meshs);
-                    meshs = meshs.clone();
-                    meshs.scale.set(1,1,1);
-                    meshs.position.copy(hightlightpos);
-                    scene.add(meshs);
-                    //console.log(meshs.name);
-                    // let cn = myref.current
-                    // myref.current = cn-100;
-                    let c = localStorage.getItem('coin')? localStorage.getItem('coin') : 5000;
-                    console.log('coin'+c);
-                    c = c-100;
-                    localStorage.setItem('coin',c);
+    if(intersects && intersects.length){
+        console.log('intersects :' + intersects.length);
+
+        //stringifing array because set treat array with of same value as different because their reference is different
+        let temp = JSON.stringify([hightlightpos.x,hightlightpos.y,hightlightpos.z]);
+        console.log(occupiedLocation.has(temp));
+        if(!occupiedLocation.has(temp)){
+            for(let i=0;i<intersects.length;i++){
+                if(intersects[i].object.name === 'plane'){
+                    if(meshs){
+                        occupiedLocation.add(temp);
+                        console.log('location '+ JSON.stringify(hightlightpos));
+                        console.log('set size :'+occupiedLocation.size);
+                        console.log('meshs : '+meshs.name);
+                        meshs = meshs.clone();
+                        meshs.scale.set(1,1,1);
+                        meshs.position.copy(hightlightpos);
+                        scene.add(meshs);
+                        console.log(meshs.name);
+
+                        //update coin point
+                        localStorage.setItem('coin',localStorage.getItem('coin')-100);
+                        setCoin(localStorage.getItem('coin'));
+
+                        return;
+                    }
                 }
             }
         }
@@ -123,16 +135,11 @@ renderer.setAnimationLoop(animate);
 
 const Game = () => {
     const [meshselected,setmeshselect]= useState(null);
+    const [coinCount,setCoin] = useState(0);
 
     useEffect(()=>{
         if(meshselected){
             console.log('button clicked to select model: '+meshselected);
-            // if(meshselected === 'cone'){
-            //     meshs = cone;
-            // }
-            // else if(meshselected === 'box'){
-            //     meshs = box;
-            // }
             let modelUrl;
             if(meshselected === 'pine_tree')
                 modelUrl = new URL('../assets/pine_tree.glb',import.meta.url);
@@ -145,6 +152,7 @@ const Game = () => {
             //const wolfUrl = new URL('../assets/wolf_blender.glb',import.meta.url);
             assestloader.load(modelUrl.href,async (gltf)=>{
                 meshs = gltf.scene;
+                meshs.name = meshselected;
                 meshs.scale.set(1,1,1);
             },
             undefined,
@@ -158,13 +166,24 @@ const Game = () => {
         const gamecanvas = document.getElementById('gamecanvas');
         gamecanvas.appendChild(renderer.domElement);
         gamecanvas.addEventListener('mousemove',mousemove);
-        gamecanvas.addEventListener('mousedown',mousedown());
-    });
+        gamecanvas.addEventListener('mousedown',()=>{mousedown(setCoin)});
+
+        //initialize coin point
+        if(!window.localStorage.getItem('coin')){
+            window.localStorage.setIteam('coin',5000);
+        }
+        setCoin(localStorage.getItem('coin'));
+        console.log('I am first effect');
+        return() =>{
+            gamecanvas.removeEventListener('mousemove',mousemove);
+            gamecanvas.removeEventListener('mousedown',()=>{mousedown()});
+        }
+    },[]);
     return(
         <>
         <h1>Game page</h1>
         <div id='gamecanvas' className="gamecanvas">
-            <div className="coin" >{window.localStorage.getItem('coin')?localStorage.getItem('coin'):5000}</div>
+            <div className="coin" >coin : {coinCount}</div>
             <div id='models' className="models">
                 <div className={'model_button pine_tree ' + (meshselected === 'pine_tree'? 'active': '')} onClick={()=>{setmeshselect('pine_tree')}}></div>
                 <div className={" model_button history_house "+ (meshselected === 'history_house'? 'active': '')} onClick={()=>{setmeshselect('history_house')}}></div>
