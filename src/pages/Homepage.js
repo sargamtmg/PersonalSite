@@ -12,11 +12,6 @@ const Homepage = () =>{
         <>
         <div className='view1'>
                 <div className='red layer' id='redid' ref ={myref}>
-                    <div className='wrapper'>
-                        <div className='hidebox'>
-                            <div className='welcome'>Welcome To My World</div>
-                        </div>
-                    </div>
                 </div>
                 <div className='yellow layer' id='yellowid' ref={myref2}>
                     I am YELLOW
@@ -36,10 +31,23 @@ Get the Huge list of 100+ Speech Topics here
                 </div>
             </div>
             <div className='view2'>
-                <div className='purple layer'>
-                    I am purple.
+                <div className='purple layer'>  
+                    <div className='whole_collection'>
+                        <div className='first_two_page mini_collection'>
+                            <div className='aboutMe_mini mini'> About me</div>
+                            <div className='skill_mini mini'> Skill</div>
+                        </div>
+                        <div className='letterT'>
+                            <div className='upperline' id='upperline'></div>
+                            <div className='middleline'></div>
+                        </div>
+                        <div className='second_two_page mini_collection'>
+                            <div className='project_mini mini'>project</div>
+                            <div className='game_mini mini'>game</div>
+                        </div>
+                    </div>
                 </div>
-                <div className='blue footer'>
+                <div className='blue footer' id='blueid'>
                     I am Blue
                     <div className='myName'>
                         <div className='sargam'>
@@ -52,7 +60,6 @@ Get the Huge list of 100+ Speech Topics here
                         </div>
                         <div className='leftname amang hide'>amang</div>
                     </div>
-                    <div className='Tletter'></div>
                 </div>
             </div>
         </>

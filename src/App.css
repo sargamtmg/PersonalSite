@@ -1,11 +1,12 @@
 @import 'styles/game.css';
+@import 'styles/homepage.css';
 
 .body{
   overflow: hidden;
 }
 .layer{
   width: 100%;
-  height:90vh;
+  height:91vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -45,6 +46,8 @@
 
 .purple{
   background-color: purple;
+  align-items: normal;
+  z-index:2;
 }
 
 .blue{
@@ -68,6 +71,10 @@
 
 .hide{
   display: none;
+}
+
+.navChild{
+  z-index:5;
 }
 
 .nav{
@@ -118,21 +125,13 @@
 }
 
 .SMiddle{
-  z-index:2;
-}
-
-.Tletter{
-  width:20px;
-  height:200px;
-  background-color: yellow;
-  position: fixed;
-  bottom:30px;
-  left:40px;
+  z-index:3;
 }
 
 .myName{
   position:absolute;
   left:0px;
+  margin-left: 8.5vw;
 }
 
 .sargam{

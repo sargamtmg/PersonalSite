@@ -1,0 +1,62 @@
+.whole_collection{
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 10vw;
+}
+
+.mini_collection{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.mini{
+    width:30vw;
+    height:30vh;
+    margin: 3vh;
+    background-color: black;
+    color: rgb(255, 245, 245);
+}
+.aboutMe_mini{
+    background-color: bisque;
+    z-index: 2;
+}
+
+.skill_mini{
+    background-color: aquamarine;
+    z-index: 3;
+}
+
+.project_mini{
+    background-color: azure;
+    z-index: 2;
+}
+
+.game_mini{
+    background-color: salmon;
+    z-index: 3;
+}
+
+.letterT{
+    width: 4vh;
+    height:80vh;
+    margin:2vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.upperline{
+    height:4vh;
+    width:4vh;
+    background-color: yellow;
+}
+.middleline{
+    width: 100%;
+    height: 100%;
+    background-color: yellow;
+}
