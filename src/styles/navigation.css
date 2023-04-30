@@ -1,0 +1,45 @@
+.navChild{
+    z-index:5;
+}
+  
+.nav{
+    height:10vh;
+    background-color: rgb(0, 0, 0);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.logo{
+    background-image: url('../img/logo/logo2.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    width:12vh;
+    height: 9vh;
+    border-radius: 5px;
+}
+  
+.nav-ul{
+    list-style: none;
+    display: flex;
+    margin-right: 10vw;
+    list-style-type: none;
+}
+  
+.nav-li{
+    margin-right: 20px;
+    text-decoration: none;
+    color:white;
+    border-radius: 5px;
+    padding: 3px;
+}
+  
+.navList{
+    color:white;
+    text-decoration: none;
+}
+  
+.navList:hover{
+    background-color: white;
+    color: black;
+}

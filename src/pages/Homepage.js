@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import { Link } from "react-router-dom";
 import sletterTop from '../img/sletterTop.png';
 import sletterMiddle from '../img/sletterMiddle.png';
 import sletterBottom from '../img/sletterBottom.png';
@@ -34,21 +35,20 @@ Get the Huge list of 100+ Speech Topics here
                 <div className='purple layer'>  
                     <div className='whole_collection'>
                         <div className='first_two_page mini_collection'>
-                            <div className='aboutMe_mini mini'> About me</div>
-                            <div className='skill_mini mini'> Skill</div>
+                            <Link to="/aboutMe"><div className='aboutMe_mini mini'> About me</div></Link>
+                            <Link to='/skill'><div className='skill_mini mini'> Skill</div></Link>
                         </div>
                         <div className='letterT'>
                             <div className='upperline' id='upperline'></div>
                             <div className='middleline'></div>
                         </div>
                         <div className='second_two_page mini_collection'>
-                            <div className='project_mini mini'>project</div>
-                            <div className='game_mini mini'>game</div>
+                            <Link to='/projects'><div className='project_mini mini'>project</div></Link>
+                            <Link to='/game'><div className='game_mini mini'>game</div></Link>
                         </div>
                     </div>
                 </div>
                 <div className='blue footer' id='blueid'>
-                    I am Blue
                     <div className='myName'>
                         <div className='sargam'>
                             <div className='Sletter'>
@@ -59,6 +59,17 @@ Get the Huge list of 100+ Speech Topics here
                             <div className='leftname hide'>argam</div>
                         </div>
                         <div className='leftname amang hide'>amang</div>
+                    </div>
+                    <div className='social_media'>
+                        <div className='handle_collection'>
+                            <a href='https://www.youtube.com/' target='_blank' className='fb handles'></a>
+                            <a href='https://www.linkedin.com/in/sargam-tamang-9412a8189/' target='_blank' className='ln handles'></a>
+                        </div>
+                        <div className='handle_collection'>
+                            <a href ='#' target='_blank' className='insta handles'></a>
+                            <a href='https://github.com/sargamtmg' target='_blank' className='git handles'></a>
+                        </div>
+                        <div className='email_address'>sargamtmg228@gmail.ccom</div>
                     </div>
                 </div>
             </div>

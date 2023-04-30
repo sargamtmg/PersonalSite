@@ -5,6 +5,7 @@ const Nav = () =>{
     let items = ['About Me','Skill','Projects','Hobby','Game','Contact'];
     return(
         <div className="nav">
+            <div className="logo"></div>
             <ul className="nav-ul">
                 <li className="nav-li">
                     <Link to="/" className="navList">Homepage</Link>

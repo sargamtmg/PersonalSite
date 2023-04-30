@@ -1,5 +1,7 @@
 @import 'styles/game.css';
 @import 'styles/homepage.css';
+@import 'styles/navigation.css';
+@import 'styles/footer.css';
 
 .body{
   overflow: hidden;
@@ -41,21 +43,18 @@
 /* first layer end */
 
 .yellow{
-  background-color: yellow;
+  background-image: linear-gradient(#201f1f 10%,#060606f5);
+  color: white;
 }
 
 .purple{
-  background-color: purple;
+  background-color: #060606f5;
   align-items: normal;
   z-index:2;
 }
 
 .blue{
-  background-color: darkblue;
-}
-
-.trans{
-  background-color: black;
+  background-color: white;
 }
 
 .fixedToTop{
@@ -72,86 +71,6 @@
 .hide{
   display: none;
 }
-
-.navChild{
-  z-index:5;
-}
-
-.nav{
-  height:10vh;
-  background-color: rgb(0, 0, 0);
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-}
-
-.nav-ul{
-  list-style: none;
-  display: flex;
-  margin-right: 10vw;
-  list-style-type: none;
-}
-
-.nav-li{
-  margin-right: 20px;
-  text-decoration: none;
-  color:white;
-  border-radius: 5px;
-  padding: 3px;
-}
-
-.navList{
-  color:white;
-  text-decoration: none;
-}
-
-.navList:hover{
-  background-color: white;
-  color: black;
-}
-
-.footer{
-  width: 100%;
-  height: 40vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* footer name start */
-.Sletter{
-  display:flex;
-  flex-direction: column;
-}
-
-.SMiddle{
-  z-index:3;
-}
-
-.myName{
-  position:absolute;
-  left:0px;
-  margin-left: 8.5vw;
-}
-
-.sargam{
-  display:flex;
-}
-
-.leftname{
-  font-family: fantasy;
-  font-size:30px;
-  position:absolute;
-  bottom: 15px;
-  right: -80px;
-}
-
-.amang{
-  bottom: -25px;
-  color: yellow;
-}
-
-/*footer name end*/
 
 /* Contact form start */
 

@@ -68,11 +68,12 @@ const MainPage = () => {
             //width 0 to minis
             gsap.to('.mini_collection',{
                 width: 0,
+                height: '20vh',
                 duration: 1,
                 scrollTrigger:{
                     trigger: '.purple',
                     start: 'bottom 10%',
-                    end: 'bottom -50%',
+                    end: 'bottom -35%',
                     markers:true,
                     scrub: true,
                     toggleActions: 'play pause reverse none',
@@ -87,7 +88,7 @@ const MainPage = () => {
                 scrollTrigger:{
                     trigger: '.purple',
                     start: 'bottom 10%',
-                    end: 'bottom -50%',
+                    end: 'bottom -35%',
                     markers:true,
                     scrub: true,
                     toggleActions: 'play pause reverse none',
@@ -102,8 +103,8 @@ const MainPage = () => {
                 delay: 2,
                 scrollTrigger:{
                     trigger: '.purple',
-                    start: 'bottom -50%',
-                    end: 'bottom -100%',
+                    start: 'bottom -35%',
+                    end: 'bottom -70%',
                     markers:true,
                     scrub: true,
                     toggleActions: 'play pause reverse none',
@@ -114,7 +115,7 @@ const MainPage = () => {
             ScrollTrigger.create({
                 trigger: '.purple',
                 start: 'bottom 100%',
-                end: 'bottom -100%',
+                end: 'bottom -50%',
                 pin: true
             });
             
@@ -140,7 +141,6 @@ const MainPage = () => {
         const rede = document.querySelector('#redid');
         let red = rede.getBoundingClientRect();
         const transe = document.querySelector('#transid');
-        let trans = transe.getBoundingClientRect();
         const yellowe = document.querySelector('#yellowid');
         let yellow = yellowe.getBoundingClientRect();
         const purplee = document.querySelector('.purple');
@@ -150,8 +150,6 @@ const MainPage = () => {
         {
             yellowe.classList.add('fixedToTop');
             transe.classList.remove('hide');
-            let op = (yellow.bottom - (yellow.bottom - red.bottom))/(yellow.bottom*2);
-            transe.style.opacity= op;
             navChild.classList.remove('stickyToTop');
             if(red.bottom <= 75){
                 navChild.classList.add('stickyToTop');
