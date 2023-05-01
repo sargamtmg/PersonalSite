@@ -2,6 +2,7 @@
 @import 'styles/homepage.css';
 @import 'styles/navigation.css';
 @import 'styles/footer.css';
+@import 'styles/skill.css';
 
 .body{
   overflow: hidden;

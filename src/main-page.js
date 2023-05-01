@@ -29,7 +29,7 @@ const MainPage = () => {
                     trigger: '.purple',
                     start: 'bottom 100%',
                     end: 'bottom 50%',
-                    markers:true,
+                    //markers:true,
                     scrub: true,
                     toggleActions: 'play pause reverse none',
                 }
@@ -44,7 +44,7 @@ const MainPage = () => {
                     trigger: '.purple',
                     start: 'bottom 50%',
                     end: 'bottom 10%',
-                    markers:true,
+                    //markers:true,
                     scrub: true,
                     toggleActions: 'play pause reverse none',
                 }
@@ -59,7 +59,7 @@ const MainPage = () => {
                     trigger: '.purple',
                     start: 'bottom 50%',
                     end: 'bottom 10%',
-                    markers:true,
+                    //markers:true,
                     scrub: true,
                     toggleActions: 'play pause reverse none',
                 }
@@ -74,7 +74,7 @@ const MainPage = () => {
                     trigger: '.purple',
                     start: 'bottom 10%',
                     end: 'bottom -35%',
-                    markers:true,
+                    //markers:true,
                     scrub: true,
                     toggleActions: 'play pause reverse none',
                 }
@@ -89,7 +89,7 @@ const MainPage = () => {
                     trigger: '.purple',
                     start: 'bottom 10%',
                     end: 'bottom -35%',
-                    markers:true,
+                    //markers:true,
                     scrub: true,
                     toggleActions: 'play pause reverse none',
                 }
@@ -105,7 +105,7 @@ const MainPage = () => {
                     trigger: '.purple',
                     start: 'bottom -35%',
                     end: 'bottom -70%',
-                    markers:true,
+                    //markers:true,
                     scrub: true,
                     toggleActions: 'play pause reverse none',
                 }
@@ -125,7 +125,7 @@ const MainPage = () => {
                     trigger: '.footer',
                     start: 'top 90%',
                     end: 'top 60%',
-                    markers:true,
+                    //markers:true,
                     scrub: true,
                     toggleActions: 'play pause reverse none',
                 }
@@ -173,7 +173,7 @@ const MainPage = () => {
     return(
         <Router>
         <div className='main'>
-            <div className='navChild'>
+            <div className='navChild stickyToTop'>
                 <Nav/>
             </div>
             <Routes>
