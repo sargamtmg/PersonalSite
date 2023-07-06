@@ -22,6 +22,11 @@ const MainPage = () => {
         console.log('useEffect on main page');
         let ctx = gsap.context(()=>{
 
+            //initial setting height for letterT
+            gsap.from('.letterT',{
+                height: '80vh'
+            });
+
             //elongate the upperline of T
             gsap.to('.upperline',{
                 width: '90vw',
@@ -116,6 +121,7 @@ const MainPage = () => {
                 trigger: '.purple',
                 start: 'bottom 100%',
                 end: 'bottom -50%',
+                //markers: true,
                 pin: true
             });
             
@@ -158,8 +164,9 @@ const MainPage = () => {
             }
         }
         else if(red.bottom <= 0){
-            //navChild.classList.add('stickyToTop');
-            //yellowe.classList.add('stickyToTop');
+            navChild.classList.add('stickyToTop');
+            yellowe.classList.remove('fixedToTop');
+            transe.classList.add('hide');
         }
         //page hit bottom
         if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
