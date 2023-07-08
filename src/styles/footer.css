@@ -1,27 +1,40 @@
+:root{
+    --fontSize-email: 2em;
+}
 .footer{
     width: 100%;
     height: 40vh;
     display: flex;
     align-items: center;
 }
+
+.sargam{
+    display:flex;
+}
   
 .Sletter{
     display:flex;
     flex-direction: column;
+    width: 10vw;
+    min-width: 60px;
+    max-width: 100px;
 }
   
+.STop{
+    width:100%;
+}
 .SMiddle{
     z-index:3;
+    width: 100%;
+}
+.SBottom{
+    width:100%;
 }
   
 .myName{
     position:absolute;
     left:0px;
-    margin-left: 8.5vw;
-}
-  
-.sargam{
-    display:flex;
+    margin-left: 8vw;
 }
   
 .leftname{
@@ -34,7 +47,7 @@
   
 .amang{
     bottom: -25px;
-    color: #ffac00;
+    color: var(--orange-T-color);
 }
 
 /* social media */
@@ -42,15 +55,18 @@
 .email_address{
     text-align: center;
     text-decoration: underline;
-    font-size: 2em;
+    font-size: var(--fontSize-email);
     font-style: italic;
-    text-decoration-color: #ffac00;
+    text-decoration-color: var(--orange-T-color);
     text-decoration-style: solid;
-    text-decoration-thickness: 4px;
-}
-.email_address{
     cursor: pointer;
 }
+
+@media only screen and (max-width: 768px) {
+    :root{
+        --fontSize-email: 1em;
+    }
+  }
 
 .social_media{
     display: flex;
@@ -73,7 +89,7 @@
     background-size: 90%;
     background-repeat: no-repeat;
     background-position: center;
-    border-bottom: 5px solid #ffac00;
+    border-bottom: 5px solid var(--orange-T-color);
     margin: 3vh;
 }
 .handles:hover{

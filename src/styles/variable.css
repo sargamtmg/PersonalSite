@@ -1,0 +1,9 @@
+/* breakpoints */
+:root{
+--break-xsm-width: 350px;
+--break-sm-width: 768px;
+--break-tab-port-width: 1024px;
+--break-md-width: 1100px;
+--break-lg-width: 1366px;
+--orange-T-color: #ffac00;
+}

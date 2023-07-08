@@ -4,8 +4,9 @@
 @import 'styles/footer.css';
 @import 'styles/skill.css';
 
-.body{
-  overflow: hidden;
+body{
+  overflow-x: hidden;
+  margin: 0;
 }
 
 /* Contact form start */
