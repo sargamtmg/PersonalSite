@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import sletterTop from '../img/sletterTop.png';
 import sletterMiddle from '../img/sletterMiddle.png';
 import sletterBottom from '../img/sletterBottom.png';
+import scrollDown from '../img/logo/scroll_down.png';
 
 const Homepage = () =>{
     let myref = useRef(null);
@@ -155,7 +156,7 @@ const Homepage = () =>{
             yellowe.classList.add('fixedToTop');
             transe.classList.remove('hide');
             navChild.classList.remove('stickyToTop');
-            if(red.bottom <= 75){
+            if(red.bottom <= window.innerHeight*0.1){//75
                 navChild.classList.add('stickyToTop');
                 yellowe.classList.remove('fixedToTop');
                 transe.classList.add('hide');
@@ -166,6 +167,10 @@ const Homepage = () =>{
             yellowe.classList.remove('fixedToTop');
             transe.classList.add('hide');
         }
+        let scrollIcon = document.querySelector('.scrolldown');
+        window.scrollY==0 ? scrollIcon.classList.remove('hide') : scrollIcon.classList.add('hide');
+
+
         //page hit bottom
         if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
             let leftname = document.querySelectorAll('.leftname');
@@ -180,6 +185,7 @@ const Homepage = () =>{
         <div className='view1'>
                 <div className='red layer' id='redid' ref ={myref}>
                 </div>
+                <div className={window.scrollY==0 ? 'scrolldown':'scrolldown hide'}><img src={scrollDown} width='10%'></img></div>
                 <div className='yellow layer fixedToTop' id='yellowid' ref={myref2}>
                     I am YELLOWs
                     <div>Essay topics in

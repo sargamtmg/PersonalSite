@@ -47,7 +47,7 @@
   
 .amang{
     bottom: -25px;
-    color: var(--orange-T-color);
+    color: $orange-color;
 }
 
 /* social media */
@@ -57,7 +57,7 @@
     text-decoration: underline;
     font-size: var(--fontSize-email);
     font-style: italic;
-    text-decoration-color: var(--orange-T-color);
+    text-decoration-color: $orange-color;
     text-decoration-style: solid;
     cursor: pointer;
 }
@@ -89,7 +89,7 @@
     background-size: 90%;
     background-repeat: no-repeat;
     background-position: center;
-    border-bottom: 5px solid var(--orange-T-color);
+    border-bottom: 5px solid $orange-color;
     margin: 3vh;
 }
 .handles:hover{
@@ -98,30 +98,30 @@
 }
 
 .fb{
-    background-image: url('../img/social_media/facebook_b&w.png');
+    background-image: url('../../img/social_media/facebook_b&w.png');
 }
 .fb:hover{
-    background-image: url('../img/social_media/facebook.png');
+    background-image: url('../../img/social_media/facebook.png');
 }
 
 .ln{
-    background-image: url('../img/social_media/linkedin_b&w.png');
+    background-image: url('../../img/social_media/linkedin_b&w.png');
 }
 .ln:hover{
-    background-image: url('../img/social_media/linkedin.png');
+    background-image: url('../../img/social_media/linkedin.png');
 }
 
 .insta{
-    background-image: url('../img/social_media/instagram_b&w.png');
+    background-image: url('../../img/social_media/instagram_b&w.png');
 }
 .insta:hover{
-    background-image: url('../img/social_media/instagram.png');
+    background-image: url('../../img/social_media/instagram.png');
 }
 
 .git{
-    background-image: url('../img/social_media/github_b&w.png');
+    background-image: url('../../img/social_media/github_b&w.png');
 }
 .git:hover{
-    background-image: url('../img/social_media/github.png');
+    background-image: url('../../img/social_media/github.png');
 }
   

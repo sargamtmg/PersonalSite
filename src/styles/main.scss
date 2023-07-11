@@ -1,0 +1,13 @@
+@import './common/_colors.scss';
+@import './common/_variable.scss';
+@import './components/game.scss';
+@import './components/homepage.scss';
+@import './components/navigation.scss';
+@import './components/footer.scss';
+@import './components/skill.scss';
+@import './components/contact.scss';
+
+body{
+    overflow-x: hidden;
+    margin: 0;
+}
