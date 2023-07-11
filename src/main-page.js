@@ -11,12 +11,13 @@ import Game from './pages/Game';
 
 const MainPage = () => {
     const comp = useRef();
+    const gameInclude = false; //May be I will add it later
 
     return(
         <Router>
         <div className='main'>
             <div className='navChild stickyToTop'>
-                <Nav/>
+                <Nav gameInclude={gameInclude}/>
             </div>
             <Routes>
                 <Route path="/" element={<Homepage />} />

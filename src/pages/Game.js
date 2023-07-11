@@ -170,7 +170,7 @@ const Game = () => {
 
         //initialize coin point
         if(!window.localStorage.getItem('coin')){
-            window.localStorage.setIteam('coin',5000);
+            window.localStorage.setItem('coin',5000);
         }
         setCoin(localStorage.getItem('coin'));
         console.log('I am first effect');

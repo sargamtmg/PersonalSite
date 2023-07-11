@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Nav = () =>{
+const Nav = (props) =>{
     let items = ['About Me','Skill','Projects','Hobby','Game','Contact'];
     return(
         <div className="nav">
@@ -22,9 +22,11 @@ const Nav = () =>{
                 <li className="nav-li">
                     <Link to='/hobby' className="navList">Hobby</Link>
                 </li>
+                {props.gameInclude &&
                 <li className="nav-li">
                     <Link to='/game' className="navList">Game</Link>
                 </li>
+                }
                 <li className="nav-li">
                     <Link to='/Contact' className="navList">Contacts</Link>
                 </li>
