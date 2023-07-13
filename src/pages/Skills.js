@@ -1,102 +1,175 @@
-import React,{useEffect} from "react";
+import React,{useEffect} from 'react';
 import {gsap} from 'gsap';
 import ScrollTrigger from "gsap/ScrollTrigger";
+import {motion} from 'framer-motion';
+import SkillCard from './page_components/SkillCard';
+import HTML_logo from '../img/skill/HTML.png';
+import CSS_logo from '../img/skill/CSS.png';
+import Sass_logo from '../img/skill/Sass.png';
+import Node_logo from '../img/skill/node.png';
+import React_logo from '../img/skill/react.png';
+import Git_logo from '../img/skill/Git.png';
+import JS_logo from '../img/skill/JS.png';
+import AWS_logo from '../img/skill/AWS.png';
+import MongoDB_logo from '../img/skill/mongoDB.png';
+import MySQL_logo from '../img/skill/mySQL.png';
+import Cpp_logo from '../img/skill/C++.png';
+import Java_logo from '../img/skill/Java.png';
+import Three_logo from '../img/skill/Three.png';
+import Jest_logo from '../img/skill/Jest.png';
+import VSCode_logo from '../img/skill/VSCode.png';
+
 
 const Skill = () => {
+
     gsap.registerPlugin(ScrollTrigger);
 
     useEffect(()=>{
         console.log('useEffect on main page');
         let ctx = gsap.context(()=>{
 
-            gsap.to('.school_logo',{
-                height:0,
-                scrollTrigger:{
-                    trigger: '.secondary_detail',
-                    start: 'top 50%',
-                    end: 'top 40%',
-                    markers:true,
-                    scrub: true,
-                    toggleActions: 'play pause reverse none',
-                }
+            var card1_back_scrollTrigger = {
+                trigger: '.card2_section',
+                start: 'top 100%',
+                end: 'top -82%',
+                //markers:true,
+                scrub: true,
+                toggleActions: 'play pause reverse none',
+            }
+            var both_card1_2_back_scrollTrigger = {
+                trigger: '.card3_section',
+                start: 'top 100%',
+                end: 'top 7%',
+                markers:true,
+                scrub: true,
+                toggleActions: 'play pause reverse none',
+            }
+
+            //Card1 goes back
+            gsap.to('.card1',
+                {
+                    y: '-15vh',
+                    scale: 0.8,
+                    scrollTrigger:card1_back_scrollTrigger
             });
 
-            gsap.to('.secondary_logo',{
-                height:0,
-                scrollTrigger:{
-                    trigger: '.college_detail',
-                    start: 'bottom 50%',
-                    end: 'top 40%',
-                    markers:true,
-                    scrub: true,
-                    toggleActions: 'play pause reverse none',
-                }
+            //Card2 both goes back
+            gsap.to('.card2',
+                {
+                    y: '-8vh',
+                    scale:0.9,
+                    scrollTrigger: both_card1_2_back_scrollTrigger
             });
 
-            gsap.to('.detail_content',{
-                y: '-52vh',
-                scrollTrigger:{
-                    trigger: '.education_screen',
-                    start: 'bottom 100%',
-                    end: 'bottom -100%',
-                    markers:true,
-                    scrub: true,
-                    pin: true,
-                    toggleActions: 'play pause reverse none',
-                }
-            });
+            var pin_card1 = Object.assign({}, card1_back_scrollTrigger, {pin:'.card1'});
+            let pin_card2 = Object.assign({}, both_card1_2_back_scrollTrigger, {pin:'.card2'});
 
+            //just to pin card 1
+            ScrollTrigger.create(
+                pin_card1
+            );
+            ScrollTrigger.create(
+                pin_card2
+            );
         });
         return () => ctx.revert();
     },[]);
 
+    const skill_list = [
+        {
+        heading:'',
+        lists:[
+        {
+            img_url:HTML_logo,
+            name:'HTML'
+        },
+        {
+            img_url:CSS_logo,
+            name:'CSS'
+        },
+        {
+            img_url:Sass_logo,
+            name:'SASS'
+        },
+        {
+            img_url:React_logo,
+            name:'React'
+        },
+        {
+            img_url:Node_logo,
+            name:'Node JS'
+        },
+        {
+            img_url:Git_logo,
+            name:'Git'
+        },
+        {
+            img_url:AWS_logo,
+            name:'AWS'
+        },
+        {
+            img_url: MongoDB_logo,
+            name:'MongoDB'
+        },
+        {
+            img_url:MySQL_logo,
+            name:'MySQL'
+        },
+        ]
+    }];
+    const Programming_list = [
+        {
+        heading:'Programming Languages',
+        lists:[
+            {
+            img_url:JS_logo,
+            name:'Javascript'
+            },
+            {
+                img_url:Cpp_logo,
+                name:'C++'
+            },
+            {
+                img_url:Java_logo,
+                name:'Java'
+            }
+            ]
+        },
+        {
+        heading:'Other skill',
+        lists:[
+            {
+                img_url:Three_logo,
+                name:'Three js'
+            },
+            {
+                img_url:Jest_logo,
+                name:'Jest'
+            },
+            {
+                img_url:VSCode_logo,
+                name:'VS Code'
+            }
+            ]
+        },
+    ];
     return(
-        <>
-        <div className="education_screen">
-            <span className="heading">Education</span>
-            <div className="edu_wrapper">
-                <div className="edu_symbol"></div>
-                <div className="edu_logo_section">
-                    <div className="college_logo edu_logo"></div>
-                    <div className="secondary_logo edu_logo"></div>
-                    <div className="school_logo edu_logo"></div>
-                </div>
-                <div className="edu_detail_section">
-                    <div className="detail_content">
-                        <div className="blank_detail"></div>
-                        <div className="school_detail edu_detail">
-                            <span className="date">2014</span>
-                            <span className="org_name">Gloal collegiate school</span>
-                            <span className="location">-Pokhara, Nepal</span>
-                        </div>
-                        <div className="secondary_detail edu_detail">
-                            <span className="date">2016</span>
-                            <span className="org_name">Gloal collegiate higher secondary school</span>
-                            <span className="faculty">Science Faculty</span>
-                            <span className="location">-Pokhara, Nepal</span>
-                        </div>
-                        <div className="college_detail edu_detail">
-                            <span className="date">2017-2021</span>
-                            <span className="org_name">Motilal Nehru Nation Institute of Technology</span>
-                            <span className="faculty">Computer science and engineering department</span>
-                            <span className="location">-Prayagraj, India</span>
-                        </div>
-                        <div className="blank_detail"></div>
-                    </div>
-                </div>
+        <div class="skill_wrapper">
+            <motion.div 
+                class="card1_section"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay:0.5, duration: 1 }}
+            >
+                <SkillCard list={skill_list} card_heading='Professional Skills' identifier='card1'/>
+            </motion.div>
+            <div class="card2_section">
+                <SkillCard list={Programming_list} card_heading='Other Skills' identifier='card2'/>
+            </div>
+            <div class="card3_section">
+                <SkillCard list={Programming_list} card_heading='Other Skills' identifier='card3'/>
             </div>
         </div>
-        <div className="work_screen">
-            <div className="work_wrapper">
-                <div className="logo_description">
-                    <div className="company_logo"><img src="../img/edu_logo/nationalpen_logo.png"></img></div>
-                    <div className="company_description"></div>
-                </div>
-                <div className="experience_responsibility"></div>
-            </div>
-        </div>
-        <div className="skill_screen"></div>
-        </>
     );
 }
 
