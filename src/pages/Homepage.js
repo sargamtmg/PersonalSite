@@ -103,6 +103,7 @@ const Homepage = () =>{
             gsap.fromTo('.letterT',{height:'45vh'},{
                 height: '20vw',
                 width: '3vw',
+                maxWidth:'30px',
                 duration: 4,
                 delay: 2,
                 scrollTrigger:{
