@@ -2,6 +2,7 @@ import React,{useEffect} from 'react';
 import {gsap} from 'gsap';
 import ScrollTrigger from "gsap/ScrollTrigger";
 import {motion} from 'framer-motion';
+import scrollDown from '../img/logo/scroll_down.png';
 import SkillCard from './page_components/SkillCard';
 import HTML_logo from '../img/skill/HTML.png';
 import CSS_logo from '../img/skill/CSS.png';
@@ -153,23 +154,31 @@ const Skill = () => {
             ]
         },
     ];
+
+    window.addEventListener('scroll', ()=>{
+        let scrollIcon = document.querySelector('.scrolldown');
+        window.scrollY===0 ? scrollIcon.classList.remove('hide') : scrollIcon.classList.add('hide');
+
+    });
+
     return(
-        <div class="skill_wrapper">
-            <motion.div 
-                class="card1_section"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay:0.5, duration: 1 }}
+        <motion.div 
+            className="skill_wrapper"
+            initial={{ opacity: 0}}
+            animate={{ opacity: 1}}
+            transition={{ delay:0.5, duration: 1 }}
             >
+            <div className={window.scrollY===0 ? 'scrolldown':'scrolldown hide'}><img src={scrollDown} width='15%'></img></div>
+            <div className="card1_section">
                 <SkillCard list={skill_list} card_heading='Professional Skills' identifier='card1'/>
-            </motion.div>
-            <div class="card2_section">
+            </div>
+            <div className="card2_section">
                 <SkillCard list={Programming_list} card_heading='Other Skills' identifier='card2'/>
             </div>
-            <div class="card3_section">
+            <div className="card3_section">
                 <SkillCard list={Programming_list} card_heading='Other Skills' identifier='card3'/>
             </div>
-        </div>
+        </motion.div>
     );
 }
 
