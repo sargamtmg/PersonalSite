@@ -1,140 +1,134 @@
-.education_screen{
-    background-color: bisque;
-    width:100%;
-    height:90vh;
+.skill_wrapper{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
-
-.heading{
-    font-size: 50px;
-    position: absolute;
-    top:20%;
-    left:10vw;
-}
-
-.edu_wrapper{
-    background-color: blanchedalmond;
-    width:80vw;
-    height:70vh;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-}
-.edu_symbol{
-    background-color: cadetblue;
-    width:20vw;
-    height:100%;
-}
-.edu_logo_section{
-    background-color: silver;
-    width:20vw;
-    height:100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.edu_logo{
-    width:20vw;
-    height:20vh;
-    position:absolute;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-.school_logo{
-    background-color: orange;
-    background-image: url(../../img/edu_logo/school.jpg);
-}
-.secondary_logo{
-    background-color: brown;
-    background-image: url(../../img/edu_logo/secondary.png);
-}
-.college_logo{
-    background-color: #8a2be2;
-    background-image: url(../../img/edu_logo/college_logo.png);
-}
-
-.edu_detail_section{
-    background-color: green;
-    width:40vw;
-    height:100%;
-}
-.detail_content{
-    background-color: palegreen ;
-    width: 90%;
-    height:122vh;
-    display: flex;
-    flex-direction: column;
-}
-.blank_detail{
     width: 100%;
-    height: 22vh;
-    background-color: azure;
-}
-.edu_detail{
-    width:100%;
-    height:26vh;
-    background-color: aqua;
-    border: 1px solid black;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-/*school or college detail */
-.date{
-    font-size: 1.5em;
-    color: rgba(32, 32, 32, 0.45);
-}
-.org_name{
-    font-size: 2.5em;
-    color: black;
-}
-.location{
-    font-size: 1.2em;
-    color: rgb(88, 88, 88);
-    position:relative;
-    left: 20vw;
 }
 
-/* end of school or college detail */
-
-.work_screen{
-    background-color: aquamarine;
+.skill_card_wrapper{
     width:100%;
     height:90vh;
     display: flex;
-    flex-direction: row;
     justify-content: center;
     align-items: center;
 }
-.work_wrapper{
-    width:80%;
-    height:80%;
-    display: flex;
-    flex-direction: row;
-    border: 1px solid black;
-}
-.logo_description{
-    width:50%;
-    height:100%;
-}
-.company_logo{
+.card1_section{
     width:100%;
-    height:40%;
-    background-color: brown;
+    height:90%;
 }
-.company_description{
+.card2_section{
     width:100%;
-    height:60%;
-    background-color: blue;
+    height:90%;
+    z-index: 2;
+}
+.card3_section{
+    width:100%;
+    height:90%;
+    z-index: 3;
 }
 
-
-.skill_screen{
-    background-color: cornsilk;
-    width:100%;
+.card{
+    width:70%;
     height:70vh;
+    background-color: #333333;
+    border-radius: 2.5%;
+    border: 3px solid black;
+    @media only screen and (min-width: $break-lg-width) {
+        width:60%;
+    }
+    .card_head{
+        width:100%;
+        height: 20%;
+        display: flex;
+        flex-direction:column;
+        justify-content: center;
+        .card_title{
+            color:#f5f5f5;
+            text-align: center;
+            font-size: 20px;
+        }
+        .card_divider{
+            width:80%;
+        }
+    }
+    .card_contain{
+        height: 80%;
+        .card_contain_wraper{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            .section_heading{
+                align-self: start;
+                font-size: 15px;
+                text-decoration: underline;
+                color: white;
+                margin-bottom: 10px;
+                position:relative;
+                left:10%;
+            }
+            .card_contain_lists{
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                width: 90%;
+                height:fit-content;
+            }
+        }
+    }
+}
+
+.skill_item_wraper{
+    width: 20%;
+    aspect-ratio: 1/1;
+    @media only screen and (max-width: $break-tab-port-width) {
+        width:22%;
+    }
+    @media only screen and (max-width: $break-sm-width) {
+        width:27%;
+    }
+}
+
+.item_card{
+    width:100%;
+    height:100%;
+    display: flex;
+    justify-content: center;
+    .item_contain{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        box-shadow: 2px 4px 6px;
+        /*background-color: burlywood;*/
+        width: 80%;
+        height: 80%;
+        .item_logo_and_name{
+            width: 90%;
+            height: 90%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            .item_logo{
+                width:72%;
+                height:72%;
+                /*background-color: cadetblue;*/
+            }
+            .item_name{
+                width: 100%;
+                height:8%;
+                /*background-color: coral;*/
+                color: white;
+                text-align: center;
+                font-size: 17px;
+                @media only screen and (max-width: $break-md-width) {
+                    font-size: 15px;
+                }
+                @media only screen and (max-width: $break-sm-width) {
+                    font-size: 10px;
+                }
+            }
+        }
+    }
 }
