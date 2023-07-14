@@ -185,7 +185,7 @@ const Homepage = () =>{
         <div className='view1'>
                 <div className='red layer' id='redid' ref ={myref}>
                 </div>
-                <div className={window.scrollY===0 ? 'scrolldown':'scrolldown hide'}><img src={scrollDown} width='15%'></img></div>
+                <div className={window.scrollY===0 ? 'scrolldown':'scrolldown hide'}><img src={scrollDown} alt="scroll down" width='15%'></img></div>
                 <div className='yellow layer fixedToTop' id='yellowid' ref={myref2}>
                     I am YELLOWs
                     <div>Essay topics in

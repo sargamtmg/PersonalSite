@@ -168,7 +168,7 @@ const Skill = () => {
             animate={{ opacity: 1}}
             transition={{ delay:0.5, duration: 1 }}
             >
-            <div className={window.scrollY===0 ? 'scrolldown':'scrolldown hide'}><img src={scrollDown} width='15%'></img></div>
+            <div className={window.scrollY===0 ? 'scrolldown':'scrolldown hide'}><img src={scrollDown} alt="scroll down" width='15%'></img></div>
             <div className="card1_section">
                 <SkillCard list={skill_list} card_heading='Professional Skills' identifier='card1'/>
             </div>
