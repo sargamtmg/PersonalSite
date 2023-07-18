@@ -26,7 +26,6 @@ const Skill = () => {
     gsap.registerPlugin(ScrollTrigger);
 
     useEffect(()=>{
-        console.log('useEffect on main page');
         let ctx = gsap.context(()=>{
 
             var card1_back_scrollTrigger = {
