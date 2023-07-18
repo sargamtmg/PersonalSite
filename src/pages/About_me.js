@@ -1,4 +1,4 @@
-import React, { useEffect} from "react";
+import React, { useEffect, useRef} from "react";
 import * as THREE from 'three';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls'
 import {addAxis, addDirectionallightFromFourDir} from '../utilities/helper'
@@ -6,62 +6,62 @@ import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader'
 import {gsap} from 'gsap';
 import ScrollTrigger from "gsap/ScrollTrigger";
 
-//use of set to avoid model load at same location which also prevent from multiple loading -
-//of same model in same place which make less add of models causing better performance cause scene has less models.
-
-
-const renderer = new THREE.WebGLRenderer({ alpha: true });
-renderer.setClearColor( 0x000000, 0 );
-const scene = new THREE.Scene();
-
-const camera = new THREE.PerspectiveCamera(65,window.innerWidth/window.innerHeight);
-const controls = new OrbitControls(camera,renderer.domElement);
-controls.enableZoom= false;
-camera.position.set(2,4,6);
-controls.update();
-
-// const plane = new THREE.PlaneGeometry(20,20);
-// const mat = new THREE.MeshBasicMaterial({color:0xffffff});
-// const planemesh = new THREE.Mesh(plane,mat);
-// planemesh.name = 'plane';
-// planemesh.rotateX(-Math.PI/2);
-// planemesh.visible = true;
-// scene.add(planemesh);
-
-scene.add(new THREE.DirectionalLight(0xFFFFFF,1));
-addDirectionallightFromFourDir(scene);
-
-//addAxis(scene);
-//addGrid(scene,20);
-
-
-const assestloader = new GLTFLoader();
-//let mixer;
-const animate=()=>{
-    renderer.render(scene,camera);
-}
-renderer.setAnimationLoop(animate);
-
 const About_me = () => {
 
+    const isAssetloaderAsyncExecutedRef = useRef(false); //to ensure assetloader load sync func to execute once in strictmode too
+    const canvas_mountRef = useRef(null);
+
+    const model = useRef(null);
+
+    const scene = useRef(null) ;
+    const assestloader = useRef(null);
+    const renderer = useRef(null);
+
     useEffect(()=>{
-        const gamecanvas = document.getElementById('gamecanvas');
-        gamecanvas.appendChild(renderer.domElement);
-        // let modelUrl = new URL('../assets/home_office_change.glb',import.meta.url);
-        let modelUrl = new URL('../assets/graduation_animation_correction.glb',import.meta.url);
-        assestloader.load(modelUrl.href,async (gltf)=>{
-            const model = gltf.scene;
-            scene.add(model);
-            model.name = 'home_office';
-            model.scale.set(2.5,2.5,2.5);
-        },
-        undefined,
-        (err)=>{
-            console.log('error on modling model err:'+err);
-        });
-        let canvas = document.querySelector('.gamecanvas').getBoundingClientRect();
-        renderer.setSize(canvas.width,canvas.height);
-        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.current = new THREE.WebGLRenderer({ alpha: true });
+        renderer.current.setClearColor( 0x000000, 0 );
+
+        canvas_mountRef.current.appendChild(renderer.current.domElement);
+        renderer.current.setSize(canvas_mountRef.current.clientWidth,canvas_mountRef.current.clientHeight);
+        renderer.current.setPixelRatio(window.devicePixelRatio);
+
+        scene.current = new THREE.Scene();
+
+        const camera = new THREE.PerspectiveCamera(65,window.innerWidth/window.innerHeight);
+
+        const controls = new OrbitControls(camera,renderer.current.domElement);
+        controls.enableZoom= false;
+        controls.enableRotate = false;
+        camera.position.set(0,4.5,9);
+        controls.update();
+
+        scene.current.add(new THREE.DirectionalLight(0xFFFFFF,1));
+        addDirectionallightFromFourDir(scene.current);
+
+        //addAxis(scene);
+        //addGrid(scene,20);
+
+        assestloader.current = new GLTFLoader();
+
+        let modelUrl = new URL('../assets/graduation.glb',import.meta.url);
+        if(!isAssetloaderAsyncExecutedRef.current){
+            assestloader.current.load(modelUrl.href,async (gltf)=>{
+                model.current = gltf.scene;
+                scene.current.add(model.current);
+                model.current.name = 'graduation';
+                model.current.scale.set(4,4,4);
+            },
+            undefined,
+            (err)=>{
+                console.log('error on modling model err:'+err);
+            });
+            isAssetloaderAsyncExecutedRef.current = true;   // Since useeffect run twice, it prevent this async run to run twice
+        }
+
+        const animate=()=>{
+            renderer.current.render(scene.current,camera);
+        }
+        renderer.current.setAnimationLoop(animate);
 
         gsap.registerPlugin(ScrollTrigger);
 
@@ -71,7 +71,7 @@ const About_me = () => {
                 trigger: '.experience_section',
                 start: 'top 99.8%',
                 end: 'top -82%',
-                markers:true,
+                //markers:true,
                 //scrub: true,
                 pin:'.canvas_wrapper'
                 //toggleActions: 'play pause reverse none',
@@ -79,15 +79,166 @@ const About_me = () => {
             ScrollTrigger.create(
                 model_scrollTrigger
             );
+
+            ScrollTrigger.create({
+                trigger:'.experience_section',
+                start:'top 75%',
+                end:'top 70%',
+                //markers: true,
+                onEnter: func_animate,
+                onEnterBack: func_animate
+            });
         });
+        const canvasMount = canvas_mountRef.current;
         return () =>{ 
             ctx.revert();
+            if(canvasMount){
+                canvasMount.removeChild( renderer.current.domElement);
+            }
         }
     },[]);
+
+    //on page refresh scroll to top
+    window.onbeforeunload = function() {
+        window.scrollTo(0, 0);
+    };
+      
+    // to resize canvas and renderer accordingly(since canvas append render dom)
+    window.addEventListener("resize",()=>{
+        if(renderer.current){
+            renderer.current.setSize(canvas_mountRef.current.clientWidth,canvas_mountRef.current.clientHeight);
+            console.log('renderer size updated');
+        }
+    });
+
+    // Register the mousemove event
+    document.addEventListener('mousemove', onMouseMove, false);
+
+    let rotateBackTween = null;
+    // Function to handle the mousemove event
+    function onMouseMove(event) {
+        const deltaX = event.movementX || event.mozMovementX || event.webkitMovementX || 0;
+        const deltaY = event.movementY || event.mozMovementY || event.webkitMovementY || 0;
+    
+        const sensitivity = 0.002;
+        if(model.current){
+            model.current.rotation.y += deltaX * sensitivity -deltaY * sensitivity;
+            model.current.rotation.x += deltaY * sensitivity * 0.7;
+        }
+
+        if (rotateBackTween) {
+            rotateBackTween.kill();
+        }
+        
+        rotateBackTween = gsap.to(model.current.rotation, {
+            x: 0,
+            y: 0,
+            duration: 2.5,
+            ease: 'power2.out',
+        });
+    }
+
+    // Disable scroll
+    function disableScroll() {
+        document.body.classList.add('stopScroll');
+    }
+    
+    // // Enable scroll
+    function enableScroll() {
+        document.body.classList.remove('stopScroll');
+    }
+
+    const moving_out_animation = ()=>{
+        return new Promise((resolve)=>{
+            let animation_out_Interval = setInterval(()=>{
+                if(model.current)
+                    model.current.position.x-=2;
+            },25);
+
+            setTimeout(()=>{
+                clearInterval(animation_out_Interval);
+                resolve();
+            },200);
+        });
+    }
+
+    const moving_in_animation = async ()=>{
+        return new Promise((resolve)=>{
+            let animation_in_Interval = setInterval(()=>{
+                model.current.scale.x+=0.2;
+                model.current.scale.y+=0.2;
+                model.current.scale.z+=0.2;
+                console.log(model.current.scale.x);
+                //console.log(model.current.position.x);
+            },20);
+
+            setTimeout(()=>{
+                clearInterval(animation_in_Interval);
+                resolve();
+            },400);
+        });
+    }
+
+    const func_animate = async()=>{
+
+        disableScroll();
+
+        await moving_out_animation();
+
+        let first_model_name;
+        if(model.current){
+            first_model_name = model.current.name;
+            scene.current.remove(model.current);
+        }
+        let modelUrl;
+        if(first_model_name==='home_office'){
+            modelUrl = new URL('../assets/graduation.glb',import.meta.url);
+            assestloader.current.load(modelUrl.href,async (gltf)=>{
+                model.current = gltf.scene;
+                scene.current.add(model.current);
+                model.current.name = 'graduation';
+                //model.current.scale.set(3,3,3);
+                model.current.scale.set(0,0,0);
+                window.scrollBy({
+                    top: -window.innerHeight * 0.3,
+                    behavior: "smooth"
+                });
+                await moving_in_animation();
+                model.current.scale.set(4,4,4);
+                enableScroll();
+            },
+            undefined,
+            (err)=>{
+                console.log('error on modling model err:'+err);
+            });
+        }else{
+            modelUrl = new URL('../assets/home_office.glb',import.meta.url);
+            assestloader.current.load(modelUrl.href,async (gltf)=>{
+                model.current = gltf.scene;
+                scene.current.add(model.current);
+                model.current.name = 'home_office';
+                //model.current.scale.set(4.5,4.5,4.5);
+                model.current.scale.set(0,0,0);
+                window.scrollBy({
+                    top: window.innerHeight * 0.3,
+                    behavior: "smooth"
+                });
+                await moving_in_animation();
+                model.current.scale.set(4,4,4);
+                enableScroll();
+            },
+            undefined,
+            (err)=>{
+                console.log('error on modling model err:'+err);
+            });
+        }
+        //await moving_in_animation();
+    }
+
     return(
         <div className='aboutme_wrapper'>
             <div className="canvas_wrapper">
-                <div id='gamecanvas' className="gamecanvas"></div>
+                <div id='gamecanvas' className="gamecanvas" ref={canvas_mountRef}></div>
             </div>
             <div className="aboutme_detail">
                 <div className="aboutme_section_wrapper">
