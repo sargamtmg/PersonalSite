@@ -2,9 +2,10 @@ import React, { useRef, useEffect} from 'react';
 import {gsap} from 'gsap';
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { Link } from "react-router-dom";
-import sletterTop from '../img/sletterTop.png';
-import sletterMiddle from '../img/sletterMiddle.png';
-import sletterBottom from '../img/sletterBottom.png';
+import {motion} from "framer-motion";
+import sletterTop from '../img/homepage/sletterTop.png';
+import sletterMiddle from '../img/homepage/sletterMiddle.png';
+import sletterBottom from '../img/homepage/sletterBottom.png';
 import scrollDown from '../img/logo/scroll_down.png';
 
 const Homepage = () =>{
@@ -14,7 +15,12 @@ const Homepage = () =>{
 
     gsap.registerPlugin(ScrollTrigger);
 
-    //this is to be used
+    //
+    let intro_data={
+        name: 'I\'m Sargam Tamang',
+        position: 'Full Stack Developer',
+        content: 'I am currently seeking for new career opportunities, and if my work resonates with you, I would love to connect and discuss potential collaborations.'
+    }
 
     useEffect(()=>{
         console.log('useEffect on main page');
@@ -183,20 +189,36 @@ const Homepage = () =>{
 
     return(
         <>
-        <div className='view1'>
-                <div className='red layer' id='redid' ref ={myref}>
-                </div>
-                <div className={window.scrollY===0 ? 'scrolldown':'scrolldown hide'}><img src={scrollDown} alt="scroll down" width='15%'></img></div>
-                <div className='yellow layer fixedToTop' id='yellowid' ref={myref2}>
-                    I am YELLOWs
-                    <div>Essay topics in
-
+        <motion.div 
+        className='view1'
+        initial={{opacity:0.2}}
+        animate={{opacity:1}}
+        exit={{opacity:1}}
+        transition={{duration:1}}
+        >
+            <div className='red layer' id='redid' ref ={myref}>
+                <div className='introduction'>
+                    <div className='intro_name'>{intro_data.name}</div>
+                    <div className='intro_position'>{intro_data.position}</div>
+                    <div className='intro_content'>{intro_data.content}</div>
+                    <div className='download'>
+                        <div className='resume_button download_button'>Resume</div>
+                        <div className='contact_button download_button'>Contact</div>
                     </div>
                 </div>
-                <div className='trans layer' id='transid' ref ={myref3}>
-                    I am-------------------- transparent.
+                <div className='profile_pic'>
+                    <div className='download_button'>Resume</div>
                 </div>
             </div>
+            <div className={window.scrollY===0 ? 'scrolldown':'scrolldown hide'}><img src={scrollDown} alt="scroll down" width='15%'></img></div>
+            <div className='yellow layer fixedToTop' id='yellowid' ref={myref2}>
+                I am YELLOWs
+                <div>Essay topics in</div>
+            </div>
+            <div className='trans layer' id='transid' ref ={myref3}>
+                I am-------------------- transparent.
+            </div>
+        </motion.div>
             <div className='view2'>
                 <div className='purple layer'>  
                     <div className='whole_collection'>
