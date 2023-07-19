@@ -13,11 +13,9 @@ const Homepage = () =>{
     let myref2 = useRef(null);
     let myref3 = useRef(null);
     let letterT_Ref = useRef(null);
-    const [isWidthSmallerThenXSM,setIsWidthSmall] = useState(false); //to use it to disable gsap animation for mobile when width is less then xsm(410px in my case)
 
     gsap.registerPlugin(ScrollTrigger);
 
-    //
     let intro_data={
         name: 'I\'m Sargam Tamang',
         position: 'Full Stack Developer',
@@ -26,154 +24,135 @@ const Homepage = () =>{
 
     useEffect(()=>{
         //console.log('useEffect on main page');
-        if(!isWidthSmallerThenXSM){
-            let ctx = gsap.context(()=>{
+        let ctx = gsap.context(()=>{
 
-                //initial setting height for letterT
-                gsap.from('.letterT',{
-                    height: '80vh'
+            //initial setting height for letterT
+            gsap.from('.letterT',{
+                height: '80vh'
+            });
+
+            //initial setting width og upperline
+            if(letterT_Ref.current){
+                gsap.from('.upperline',{
+                    width: letterT_Ref.current.offsetWidth
                 });
+            }
 
-                //initial setting width og upperline
-                if(letterT_Ref.current){
-                    gsap.from('.upperline',{
-                        width: letterT_Ref.current.offsetWidth
-                    });
-                }
-
-                //elongate the upperline of T
-                gsap.to('.upperline',{
-                    width: '80vw',
-                    scrollTrigger:{
-                        trigger: '.purple',
-                        start: 'bottom 100%',
-                        end: 'bottom 50%',
-                        //markers:true,
-                        scrub: true,
-                        toggleActions: 'play pause reverse none',
-                    }
-                });
-
-                //decrease size of T
-                gsap.to('.letterT',{
-                    height: '45vh',
-                    duration: 4,
-                    delay: 2,
-                    scrollTrigger:{
-                        trigger: '.purple',
-                        start: 'bottom 50%',
-                        end: 'bottom 10%',
-                        //markers:true,
-                        scrub: true,
-                        toggleActions: 'play pause reverse none',
-                    }
-                });
-
-                //overlap the upper two mini
-                gsap.to('.aboutMe_mini , .project_mini',{
-                    x:-20,
-                    y: 170,
-                    duration: 1,
-                    scrollTrigger:{
-                        trigger: '.purple',
-                        start: 'bottom 50%',
-                        end: 'bottom 10%',
-                        //markers:true,
-                        scrub: true,
-                        toggleActions: 'play pause reverse none',
-                    }
-                });
-
-                //width 0 to minis
-                gsap.to('.mini_collection',{
-                    width: 0,
-                    height: '20vh',
-                    duration: 1,
-                    scrollTrigger:{
-                        trigger: '.purple',
-                        start: 'bottom 10%',
-                        end: 'bottom -35%',
-                        //markers:true,
-                        scrub: true,
-                        toggleActions: 'play pause reverse none',
-                    }
-                });
-
-                //decrease size of T upperline
-                gsap.fromTo('.upperline',{width: '80vw'},{
-                    width: '15vw',
-                    minWidth: '90px',
-                    //duration: 1,
-                    scrollTrigger:{
-                        trigger: '.purple',
-                        start: 'bottom 10%',
-                        end: 'bottom -35%',
-                        //markers:true,
-                        scrub: true,
-                        toggleActions: 'play pause reverse none',
-                    }
-                });
-
-                //decrease size of T middle line
-                gsap.fromTo('.letterT',{height:'45vh'},{
-                    height: '19vw',
-                    duration: 4,
-                    delay: 2,
-                    width:'2.4vw',
-                    scrollTrigger:{
-                        trigger: '.purple',
-                        start: 'bottom -35%',
-                        end: 'bottom -70%',
-                        //markers:true,
-                        scrub: true,
-                        toggleActions: 'play pause reverse none',
-                    }
-                });
-
-                //just to pin purple element
-                ScrollTrigger.create({
+            //elongate the upperline of T
+            gsap.to('.upperline',{
+                width: '80vw',
+                scrollTrigger:{
                     trigger: '.purple',
                     start: 'bottom 100%',
-                    end: 'bottom -50%',
-                    //markers: true,
-                    pin: true
-                });
-                
-                gsap.to('.letterT',{
-                    y:'63vh',  //based on observation to align with amang at footer
-                    scrollTrigger:{
-                        trigger: '.footer',
-                        start: 'top 90%',
-                        end: 'top 60%',
-                        //markers:true,
-                        scrub: true,
-                        toggleActions: 'play pause reverse none',
-                    }
-                });
-
+                    end: 'bottom 50%',
+                    //markers:true,
+                    scrub: true,
+                    toggleActions: 'play pause reverse none',
+                }
             });
-            return () => ctx.revert();
-        }
-    },[isWidthSmallerThenXSM]);
 
+            //decrease size of T
+            gsap.to('.letterT',{
+                height: '45vh',
+                //duration: 4,
+                delay: 2,
+                scrollTrigger:{
+                    trigger: '.purple',
+                    start: 'bottom 50%',
+                    end: 'bottom 10%',
+                    //markers:true,
+                    scrub: true,
+                    toggleActions: 'play pause reverse none',
+                }
+            });
 
-    useEffect(() => {
+            //overlap the upper two mini
+            gsap.to('.aboutMe_mini , .project_mini',{
+                x:-20,
+                y: 170,
+                duration: 1,
+                scrollTrigger:{
+                    trigger: '.purple',
+                    start: 'bottom 50%',
+                    end: 'bottom 10%',
+                    //markers:true,
+                    scrub: true,
+                    toggleActions: 'play pause reverse none',
+                }
+            });
 
-        const checkWindowWidth = ()=> {
-            const minWidth = 410; // Set the minimum width for your desired condition
-            window.innerWidth <= minWidth ? setIsWidthSmall(true) : setIsWidthSmall(false);
-        }
+            //width 0 to minis
+            gsap.to('.mini_collection',{
+                width: 0,
+                height: '20vh',
+                duration: 1,
+                scrollTrigger:{
+                    trigger: '.purple',
+                    start: 'bottom 10%',
+                    end: 'bottom -35%',
+                    //markers:true,
+                    scrub: true,
+                    toggleActions: 'play pause reverse none',
+                }
+            });
 
-        checkWindowWidth();
-    
-        // Listen for window resize event and call the function when the window size changes
-        window.addEventListener('resize', checkWindowWidth);
-    
-        // Clean up the event listener when the component unmounts
-        return () => {
-          window.removeEventListener('resize', checkWindowWidth);
-        };
-      }, []);
+            //decrease size of T upperline
+            gsap.fromTo('.upperline',{width: '80vw'},{
+                width: '15vw',
+                minWidth: '90px',
+                //duration: 1,
+                scrollTrigger:{
+                    trigger: '.purple',
+                    start: 'bottom 10%',
+                    end: 'bottom -35%',
+                    //markers:true,
+                    scrub: true,
+                    toggleActions: 'play pause reverse none',
+                }
+            });
+
+            //decrease size of T middle line
+            gsap.fromTo('.letterT',{height:'45vh'},{
+                height: '19vw',
+                duration: 4,
+                delay: 2,
+                width:'2.4vw',
+                scrollTrigger:{
+                    trigger: '.purple',
+                    start: 'bottom -35%',
+                    end: 'bottom -70%',
+                    //markers:true,
+                    scrub: true,
+                    toggleActions: 'play pause reverse none',
+                }
+            });
+
+            //just to pin purple element
+            ScrollTrigger.create({
+                trigger: '.purple',
+                start: 'bottom 100%',
+                end: 'bottom -50%',
+                //markers: true,
+                pin: true
+            });
+            
+            gsap.to('.letterT',{
+                y:'63vh',  //based on observation to align with amang at footer
+                scrollTrigger:{
+                    trigger: '.footer',
+                    start: 'top 90%',
+                    end: 'top 60%',
+                    //markers:true,
+                    scrub: true,
+                    toggleActions: 'play pause reverse none',
+                }
+            });
+
+        });
+        return () => ctx.revert();
+        
+    },[]);
+
 
     //on page refresh scroll to top
     window.onbeforeunload = function() {

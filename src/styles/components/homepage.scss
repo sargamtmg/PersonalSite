@@ -147,7 +147,7 @@
   align-items: normal;
   z-index:2;
   @media only screen and (max-width: $break-xsm-width){
-    visibility: hidden;
+    display: none;
     height:0;
   }
 }
