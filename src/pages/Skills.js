@@ -160,6 +160,11 @@ const Skill = () => {
 
     });
 
+    //on page refresh scroll to top
+    window.onbeforeunload = function() {
+        window.scrollTo(0, 0);
+    };
+
     return(
         <motion.div 
             className="skill_wrapper"

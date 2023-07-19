@@ -1,127 +1,188 @@
-:root{
-    --fontSize-email: 2em;
-}
 .footer{
     width: 100%;
     height: 40vh;
     display: flex;
+    flex-direction: row;
     align-items: center;
+    @media only screen and (max-width: $break-xsm-width){
+        flex-direction: column;
+    }
+    .myName_wrapper{
+        width: 40%;
+        height: 100%;
+        //background-color: aquamarine;
+        display: flex;
+        align-items: center;
+        @media only screen and (max-width: $break-xsm-width){
+            visibility: hidden;
+            height: 0;
+        }
+        .myName{
+            position:absolute;
+            left:0px;
+            margin-left: 8vw;
+            .sargam{
+                display:flex;
+                align-items: flex-end;
+                .Sletter{
+                    display:flex;
+                    flex-direction: column;
+                    width: 10vw;
+                    .STop{
+                        width:100%;
+                    }
+                    .SMiddle{
+                        z-index:3;
+                        width: 100%;
+                    }
+                    .SBottom{
+                        width:100%;
+                    }
+                }
+                .leftname{
+                    font-family: fantasy;
+                    font-size:2rem;
+                    @media only screen and (max-width: $break-sm-width){
+                        font-size:1.3rem;
+                    }
+                    @media only screen and (max-width: $break-xsm-width){
+                        font-size: 1.1rem;
+                    }
+                }
+            }
+            .amang{
+                font-family: fantasy;
+                font-size:2rem;
+                position:relative;
+                left: 10vw;
+                color: $orange-color;
+                @media only screen and (max-width: $break-sm-width){
+                    font-size:1.3rem;
+                }
+                @media only screen and (max-width: $break-xsm-width){
+                    font-size: 1.1rem;
+                }
+            }
+        }
+    }
 }
 
-.sargam{
-    display:flex;
-}
-  
-.Sletter{
-    display:flex;
-    flex-direction: column;
-    width: 10vw;
-    min-width: 60px;
-    max-width: 100px;
-}
-  
-.STop{
-    width:100%;
-}
-.SMiddle{
-    z-index:3;
-    width: 100%;
-}
-.SBottom{
-    width:100%;
-}
-  
-.myName{
-    position:absolute;
-    left:0px;
-    margin-left: 8vw;
-}
-  
-.leftname{
-    font-family: fantasy;
-    font-size:30px;
-    position:absolute;
-    bottom: 15px;
-    right: -80px;
-}
-  
-.amang{
-    bottom: -25px;
-    color: $orange-color;
+.main_logo{
+    display: flex;
+    justify-content: center;
+    visibility: hidden;
+    //background-color: cornflowerblue;
+    height: 50%;
+    @media only screen and (max-width: $break-xsm-width){
+        visibility: visible;
+        width:100%;
+    }
+    .footer_logo{
+        width: 40%;
+        background-image: url("../../img/logo/main_logo_no_bg.png"); //set aspect ratio to 8:10
+        background-size: cover;
+        background-position : center center;
+    }
 }
 
 /* social media */
-
-.email_address{
-    text-align: center;
-    text-decoration: underline;
-    font-size: var(--fontSize-email);
-    font-style: italic;
-    text-decoration-color: $orange-color;
-    text-decoration-style: solid;
-    cursor: pointer;
-}
-
-@media only screen and (max-width: 768px) {
-    :root{
-        --fontSize-email: 1em;
-    }
-  }
-
-.social_media{
+.socials_wrapper{
+    width: 60%;
+    height: 100%;
+    //background-color: bisque;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    position: relative;
-    left: 50vw;
-}
-
-.handle_collection{
-    width: 27vw;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-.handles{
-    width: 9vh;
-    height: 9vh;
-    background-size: 90%;
-    background-repeat: no-repeat;
-    background-position: center;
-    border-bottom: 5px solid $orange-color;
-    margin: 3vh;
-}
-.handles:hover{
-    cursor: pointer;
-    scale: 1.2;
+    justify-content: center;
+    @media only screen and (max-width: $break-xsm-width){
+        width:100%;
+        height: 50%;
+    }
+    .social_media{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        width: 50%;
+        @media only screen and (max-width: $break-sm-width){
+            width: 80%;
+        }
+        .handle_wrapper{
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            @media only screen and (max-width: $break-xsm-width){
+                flex-direction: row;
+            }
+            .handle_collection{
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-evenly;
+                @media only screen and (max-width: $break-xsm-width){
+                    width: 50%;
+                }
+                .handles{
+                    width: 9vh;
+                    height: 9vh;
+                    background-size: 90%;
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    border-bottom: 5px solid $orange-color;
+                    margin: 3vh;
+                    @media only screen and (max-width: $break-xsm-width){
+                        margin: 1.5vh;
+                    }
+                    &:hover{
+                        cursor: pointer;
+                        scale: 1.2;
+                    }
+                }
+            }
+        }
+        .email_address{
+            text-align: center;
+            text-decoration: underline;
+            font-size: 2rem;
+            font-style: italic;
+            text-decoration-color: $orange-color;
+            text-decoration-style: solid;
+            cursor: pointer;
+            @media only screen and (max-width: $break-tab-port-width){
+                font-size: 1.6rem;
+            }
+            @media only screen and (max-width: $break-sm-width){
+                font-size: 1.2rem;
+            }
+        }
+    }
 }
 
 .fb{
     background-image: url('../../img/social_media/facebook_b&w.png');
+    &:hover{
+        background-image: url('../../img/social_media/facebook.png');
+    }
 }
-.fb:hover{
-    background-image: url('../../img/social_media/facebook.png');
-}
+
 
 .ln{
     background-image: url('../../img/social_media/linkedin_b&w.png');
-}
-.ln:hover{
-    background-image: url('../../img/social_media/linkedin.png');
+    &:hover{
+        background-image: url('../../img/social_media/linkedin.png');
+    }
 }
 
 .insta{
     background-image: url('../../img/social_media/instagram_b&w.png');
-}
-.insta:hover{
-    background-image: url('../../img/social_media/instagram.png');
+    &:hover{
+        background-image: url('../../img/social_media/instagram.png');
+    }
 }
 
 .git{
     background-image: url('../../img/social_media/github_b&w.png');
-}
-.git:hover{
-    background-image: url('../../img/social_media/github.png');
+    &:hover{
+        background-image: url('../../img/social_media/github.png');
+    }
 }
   

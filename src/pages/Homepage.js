@@ -1,4 +1,4 @@
-import React, { useRef, useEffect} from 'react';
+import React, { useRef, useEffect, useState} from 'react';
 import {gsap} from 'gsap';
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { Link } from "react-router-dom";
@@ -12,6 +12,8 @@ const Homepage = () =>{
     let myref = useRef(null);
     let myref2 = useRef(null);
     let myref3 = useRef(null);
+    let letterT_Ref = useRef(null);
+    const [isWidthSmallerThenXSM,setIsWidthSmall] = useState(false); //to use it to disable gsap animation for mobile when width is less then xsm(410px in my case)
 
     gsap.registerPlugin(ScrollTrigger);
 
@@ -23,129 +25,160 @@ const Homepage = () =>{
     }
 
     useEffect(()=>{
-        console.log('useEffect on main page');
-        let ctx = gsap.context(()=>{
+        //console.log('useEffect on main page');
+        if(!isWidthSmallerThenXSM){
+            let ctx = gsap.context(()=>{
 
-            //initial setting height for letterT
-            gsap.from('.letterT',{
-                height: '80vh'
-            });
+                //initial setting height for letterT
+                gsap.from('.letterT',{
+                    height: '80vh'
+                });
 
-            //elongate the upperline of T
-            gsap.to('.upperline',{
-                width: '90vw',
-                scrollTrigger:{
+                //initial setting width og upperline
+                if(letterT_Ref.current){
+                    gsap.from('.upperline',{
+                        width: letterT_Ref.current.offsetWidth
+                    });
+                }
+
+                //elongate the upperline of T
+                gsap.to('.upperline',{
+                    width: '80vw',
+                    scrollTrigger:{
+                        trigger: '.purple',
+                        start: 'bottom 100%',
+                        end: 'bottom 50%',
+                        //markers:true,
+                        scrub: true,
+                        toggleActions: 'play pause reverse none',
+                    }
+                });
+
+                //decrease size of T
+                gsap.to('.letterT',{
+                    height: '45vh',
+                    duration: 4,
+                    delay: 2,
+                    scrollTrigger:{
+                        trigger: '.purple',
+                        start: 'bottom 50%',
+                        end: 'bottom 10%',
+                        //markers:true,
+                        scrub: true,
+                        toggleActions: 'play pause reverse none',
+                    }
+                });
+
+                //overlap the upper two mini
+                gsap.to('.aboutMe_mini , .project_mini',{
+                    x:-20,
+                    y: 170,
+                    duration: 1,
+                    scrollTrigger:{
+                        trigger: '.purple',
+                        start: 'bottom 50%',
+                        end: 'bottom 10%',
+                        //markers:true,
+                        scrub: true,
+                        toggleActions: 'play pause reverse none',
+                    }
+                });
+
+                //width 0 to minis
+                gsap.to('.mini_collection',{
+                    width: 0,
+                    height: '20vh',
+                    duration: 1,
+                    scrollTrigger:{
+                        trigger: '.purple',
+                        start: 'bottom 10%',
+                        end: 'bottom -35%',
+                        //markers:true,
+                        scrub: true,
+                        toggleActions: 'play pause reverse none',
+                    }
+                });
+
+                //decrease size of T upperline
+                gsap.fromTo('.upperline',{width: '80vw'},{
+                    width: '15vw',
+                    minWidth: '90px',
+                    //duration: 1,
+                    scrollTrigger:{
+                        trigger: '.purple',
+                        start: 'bottom 10%',
+                        end: 'bottom -35%',
+                        //markers:true,
+                        scrub: true,
+                        toggleActions: 'play pause reverse none',
+                    }
+                });
+
+                //decrease size of T middle line
+                gsap.fromTo('.letterT',{height:'45vh'},{
+                    height: '19vw',
+                    duration: 4,
+                    delay: 2,
+                    width:'2.4vw',
+                    scrollTrigger:{
+                        trigger: '.purple',
+                        start: 'bottom -35%',
+                        end: 'bottom -70%',
+                        //markers:true,
+                        scrub: true,
+                        toggleActions: 'play pause reverse none',
+                    }
+                });
+
+                //just to pin purple element
+                ScrollTrigger.create({
                     trigger: '.purple',
                     start: 'bottom 100%',
-                    end: 'bottom 50%',
-                    //markers:true,
-                    scrub: true,
-                    toggleActions: 'play pause reverse none',
-                }
-            });
+                    end: 'bottom -50%',
+                    //markers: true,
+                    pin: true
+                });
+                
+                gsap.to('.letterT',{
+                    y:'63vh',  //based on observation to align with amang at footer
+                    scrollTrigger:{
+                        trigger: '.footer',
+                        start: 'top 90%',
+                        end: 'top 60%',
+                        //markers:true,
+                        scrub: true,
+                        toggleActions: 'play pause reverse none',
+                    }
+                });
 
-            //decrease size of T
-            gsap.to('.letterT',{
-                height: '45vh',
-                duration: 4,
-                delay: 2,
-                scrollTrigger:{
-                    trigger: '.purple',
-                    start: 'bottom 50%',
-                    end: 'bottom 10%',
-                    //markers:true,
-                    scrub: true,
-                    toggleActions: 'play pause reverse none',
-                }
             });
+            return () => ctx.revert();
+        }
+    },[isWidthSmallerThenXSM]);
 
-            //overlap the upper two mini
-            gsap.to('.aboutMe_mini , .project_mini',{
-                x:-20,
-                y: 170,
-                duration: 1,
-                scrollTrigger:{
-                    trigger: '.purple',
-                    start: 'bottom 50%',
-                    end: 'bottom 10%',
-                    //markers:true,
-                    scrub: true,
-                    toggleActions: 'play pause reverse none',
-                }
-            });
 
-            //width 0 to minis
-            gsap.to('.mini_collection',{
-                width: 0,
-                height: '20vh',
-                duration: 1,
-                scrollTrigger:{
-                    trigger: '.purple',
-                    start: 'bottom 10%',
-                    end: 'bottom -35%',
-                    //markers:true,
-                    scrub: true,
-                    toggleActions: 'play pause reverse none',
-                }
-            });
+    useEffect(() => {
 
-            //decrease size of T upperline
-            gsap.fromTo('.upperline',{width:'90vw'},{
-                width: '15vw',
-                minWidth: '90px',
-                height:'20px',
-                duration: 1,
-                scrollTrigger:{
-                    trigger: '.purple',
-                    start: 'bottom 10%',
-                    end: 'bottom -35%',
-                    //markers:true,
-                    scrub: true,
-                    toggleActions: 'play pause reverse none',
-                }
-            });
+        const checkWindowWidth = ()=> {
+            const minWidth = 410; // Set the minimum width for your desired condition
+            window.innerWidth <= minWidth ? setIsWidthSmall(true) : setIsWidthSmall(false);
+        }
 
-            //decrease size of T middle line
-            gsap.fromTo('.letterT',{height:'45vh'},{
-                height: '20vw',
-                width: '3vw',
-                maxWidth:'30px',
-                duration: 4,
-                delay: 2,
-                scrollTrigger:{
-                    trigger: '.purple',
-                    start: 'bottom -35%',
-                    end: 'bottom -70%',
-                    //markers:true,
-                    scrub: true,
-                    toggleActions: 'play pause reverse none',
-                }
-            });
+        checkWindowWidth();
+    
+        // Listen for window resize event and call the function when the window size changes
+        window.addEventListener('resize', checkWindowWidth);
+    
+        // Clean up the event listener when the component unmounts
+        return () => {
+          window.removeEventListener('resize', checkWindowWidth);
+        };
+      }, []);
 
-            //just to pin purple element
-            ScrollTrigger.create({
-                trigger: '.purple',
-                start: 'bottom 100%',
-                end: 'bottom -50%',
-                //markers: true,
-                pin: true
-            });
-            
-            gsap.to('.letterT',{
-                y:'68vh',  //based on observation to align with amang at footer
-                scrollTrigger:{
-                    trigger: '.footer',
-                    start: 'top 90%',
-                    end: 'top 60%',
-                    //markers:true,
-                    scrub: true,
-                    toggleActions: 'play pause reverse none',
-                }
-            });
-
-        });
-        return () => ctx.revert();
-    },[]);
+    //on page refresh scroll to top
+    window.onbeforeunload = function() {
+        window.scrollTo(0, 0);
+    };
 
     window.addEventListener('scroll', ()=>{
         //if(!myref.current || !myref2.current || !myref3.current) return;
@@ -226,7 +259,7 @@ const Homepage = () =>{
                             <Link to="/aboutMe"><div className='aboutMe_mini mini'> About me</div></Link>
                             <Link to='/skill'><div className='skill_mini mini'> Skill</div></Link>
                         </div>
-                        <div className='letterT'>
+                        <div className='letterT' ref={letterT_Ref}>
                             <div className='upperline' id='upperline'></div>
                             <div className='middleline'></div>
                         </div>
@@ -237,27 +270,36 @@ const Homepage = () =>{
                     </div>
                 </div>
                 <div className='blue footer' id='blueid'>
-                    <div className='myName'>
-                        <div className='sargam'>
-                            <div className='Sletter'>
-                                <img src={sletterTop} alt="S letter top" className='STop' />
-                                <img src={sletterMiddle} alt="S letter middle" className='SMiddle'/>
-                                <img src={sletterBottom} alt="BS letter Bottom" className='SBottom'/>
+                    <div className='myName_wrapper'>
+                        <div className='myName'>
+                            <div className='sargam'>
+                                <div className='Sletter'>
+                                    <img src={sletterTop} alt="S letter top" className='STop' />
+                                    <img src={sletterMiddle} alt="S letter middle" className='SMiddle'/>
+                                    <img src={sletterBottom} alt="BS letter Bottom" className='SBottom'/>
+                                </div>
+                                <div className='leftname hide'>argam</div>
                             </div>
-                            <div className='leftname hide'>argam</div>
+                            <div className='leftname amang hide'>amang</div>
                         </div>
-                        <div className='leftname amang hide'>amang</div>
                     </div>
-                    <div className='social_media'>
-                        <div className='handle_collection'>
-                            <a href='https://www.youtube.com/' target='_blank' className='fb handles'></a>
-                            <a href='https://www.linkedin.com/in/sargam-tamang-9412a8189/' target='_blank' className='ln handles'></a>
+                    <div className='main_logo'>
+                        <div className='footer_logo'></div>
+                    </div>
+                    <div className='socials_wrapper'>
+                        <div className='social_media'>
+                            <div className='handle_wrapper'>
+                                <div className='handle_collection'>
+                                    <a href='https://www.youtube.com/' target='_blank' className='fb handles'></a>
+                                    <a href='https://www.linkedin.com/in/sargam-tamang-9412a8189/' target='_blank' className='ln handles'></a>
+                                </div>
+                                <div className='handle_collection'>
+                                    <a href ='#' target='_blank' className='insta handles'></a>
+                                    <a href='https://github.com/sargamtmg' target='_blank' className='git handles'></a>
+                                </div>
+                            </div>
+                            <div className='email_address'>sargamtmg228@gmail.com</div>
                         </div>
-                        <div className='handle_collection'>
-                            <a href ='#' target='_blank' className='insta handles'></a>
-                            <a href='https://github.com/sargamtmg' target='_blank' className='git handles'></a>
-                        </div>
-                        <div className='email_address'>sargamtmg228@gmail.com</div>
                     </div>
                 </div>
             </div>
