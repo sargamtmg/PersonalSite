@@ -3,6 +3,9 @@ import {gsap} from 'gsap';
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { Link } from "react-router-dom";
 import {motion} from "framer-motion";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faDownload} from "@fortawesome/free-solid-svg-icons"
+import resume_doc from '../documents/Sargam_Resume.pdf';
 import sletterTop from '../img/homepage/sletterTop.png';
 import sletterMiddle from '../img/homepage/sletterMiddle.png';
 import sletterBottom from '../img/homepage/sletterBottom.png';
@@ -199,6 +202,13 @@ const Homepage = () =>{
         }
     });
 
+    const download_resume = ()=>{
+        let alink = document.createElement('a');
+        alink.href = resume_doc;
+        alink.download = 'Sargam_resume.pdf';
+        alink.click();
+    }
+
     return(
         <>
         <motion.div 
@@ -214,12 +224,11 @@ const Homepage = () =>{
                     <div className='intro_position'>{intro_data.position}</div>
                     <div className='intro_content'>{intro_data.content}</div>
                     <div className='download'>
-                        <div className='resume_button download_button'>Resume</div>
-                        <div className='contact_button download_button'>Contact</div>
+                        <div className='resume_button download_button' onClick={download_resume}>Resume <FontAwesomeIcon icon={faDownload}/></div>
                     </div>
                 </div>
                 <div className='profile_pic'>
-                    <div className='download_button'>Resume</div>
+                    <div className='download_button' onClick={download_resume}>Resume <FontAwesomeIcon icon={faDownload}/></div>
                 </div>
             </div>
             <div className={window.scrollY===0 ? 'scrolldown':'scrolldown hide'}><img src={scrollDown} alt="scroll down" width='15%'></img></div>

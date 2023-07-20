@@ -26,27 +26,27 @@ const Nav = (props) =>{
             <div className="logo"></div>
             <ul className={`nav-ul ${isNavOpen? 'nav_active':''}`}>
                 <li className="nav-li">
-                    <NavLink to="/" className="navList" activeClassName="active" onClick={toggleIsNavOpen}>Homepage</NavLink>
+                    <NavLink to="/" className="navList" activeclassname="active" onClick={toggleIsNavOpen}>Homepage</NavLink>
                 </li>
                 <li className="nav-li">
-                    <NavLink to="/aboutMe" className="navList" activeClassName="active" onClick={toggleIsNavOpen}>About Me</NavLink>
+                    <NavLink to="/aboutMe" className="navList" activeclassname="active" onClick={toggleIsNavOpen}>About Me</NavLink>
                 </li>
                 <li className="nav-li">
-                    <NavLink to='/skill' className="navList" activeClassName="active" onClick={toggleIsNavOpen}>Skill</NavLink>
+                    <NavLink to='/skill' className="navList" activeclassname="active" onClick={toggleIsNavOpen}>Skill</NavLink>
                 </li>
                 <li className="nav-li">
-                    <NavLink to='/projects' className="navList" activeClassName="active" onClick={toggleIsNavOpen}>Projects</NavLink>
+                    <NavLink to='/projects' className="navList" activeclassname="active" onClick={toggleIsNavOpen}>Projects</NavLink>
                 </li>
                 <li className="nav-li">
-                    <NavLink to='/hobby' className="navList" activeClassName="active" onClick={toggleIsNavOpen}>Hobby</NavLink>
+                    <NavLink to='/hobby' className="navList" activeclassname="active" onClick={toggleIsNavOpen}>Hobby</NavLink>
                 </li>
                 {props.gameInclude &&
                 <li className="nav-li">
-                    <NavLink to='/game' className="navList" activeClassName="active" onClick={toggleIsNavOpen}>Game</NavLink>
+                    <NavLink to='/game' className="navList" activeclassname="active" onClick={toggleIsNavOpen}>Game</NavLink>
                 </li>
                 }
                 <li className="nav-li">
-                    <NavLink to='/Contact' className="navList" activeClassName="active" onClick={toggleIsNavOpen}>Contacts</NavLink>
+                    <NavLink to='/Contact' className="navList" activeclassname="active" onClick={toggleIsNavOpen}>Contacts</NavLink>
                 </li>
             </ul>
             <div className="triple_bar" onClick={toggleIsNavOpen}>

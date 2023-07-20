@@ -15,7 +15,7 @@
   background-position : center center;
   position:relative;
   .introduction{
-    width: 60%;
+    width: 55%;
     height: 60%;
     //background-color:darkslategrey;
     align-self: flex-start;
@@ -31,6 +31,10 @@
       height:40%;
       left:15%;
       top:-30%;
+    }
+    @media only screen and (max-width: $break-xsm-width){
+      width: 90%;
+      left:5%;
     }
     .intro_name{
       font-size: 3.2rem;
@@ -53,23 +57,29 @@
     }
     .intro_content{
       color: white;
+      font-size: 1rem;
+      line-height: 1.5rem;
+      margin-top:2.5vh;
       @media only screen and (max-width: $break-tab-port-width){
         text-align: center;
       }
+      @media only screen and (max-width: $break-xsm-width){
+        font-size: 0.8rem;
+        line-height: 1rem;
+        margin-top: 2vh;
+      }
     }
     .download{
-      width: 50%;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-evenly;
+      margin-top: 5vh;
       @media only screen and (max-width: $break-sm-width){
-        visibility: hidden;
+        display: none;
       }
       .download_button{
         background-color: $orange-color;
         color: white;
         padding: 10px;
         border-radius: 4px;
+        cursor: pointer;
       }
     }
   }
@@ -93,11 +103,11 @@
     @media only screen and (max-width: $break-tab-port-width){
       width: 50%;
       height:60%;
-      right: 30%; //to keep in center
+      right: 25%; //to keep in center
     }
     @media only screen and (max-width: $break-sm-width){
-      width: 73%;
-      right: 15%; // to keep in center
+      width: 74%;
+      right: 13%; // to keep in center
     }
     @media only screen and (max-width: $break-xsm-width){
       width: 90%;
@@ -111,6 +121,7 @@
       border-radius: 4px;
       visibility: hidden;
       margin-bottom: 20px;
+      cursor: pointer;
       @media only screen and (max-width: $break-sm-width){
         visibility: visible;
       }

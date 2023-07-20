@@ -81,6 +81,7 @@
     margin-right: 5vw;
     height: 50%;
     display: none;
+    cursor: pointer;
     @media only screen and (max-width: $break-sm-width) {
         display: block;
     }
