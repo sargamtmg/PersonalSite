@@ -1,16 +1,19 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
 
 const Nav = (props) =>{
     //let items = ['About Me','Skill','Projects','Hobby','Game','Contact'];
+    let tripleBarRef = useRef(null);
 
     const [isNavOpen,setIsNavOpen] = useState(false);
     
     const toggleIsNavOpen = ()=>{
-        isNavOpen ? enable_scroll() : disable_scroll();
-        setIsNavOpen(!isNavOpen);
+        if(tripleBarRef.current.offsetParent){ // condition to check if element is hidden (display: none)
+            isNavOpen ? enable_scroll() : disable_scroll();
+            setIsNavOpen(!isNavOpen);
+        }
     }
 
     const disable_scroll = ()=>{
@@ -49,7 +52,7 @@ const Nav = (props) =>{
                     <NavLink to='/Contact' className="navList" activeclassname="active" onClick={toggleIsNavOpen}>Contacts</NavLink>
                 </li>
             </ul>
-            <div className="triple_bar" onClick={toggleIsNavOpen}>
+            <div className="triple_bar" ref={tripleBarRef} onClick={toggleIsNavOpen}>
                 {isNavOpen ? <FontAwesomeIcon icon={faXmark} className="nav_icon"/> : <FontAwesomeIcon icon={faBars} className="nav_icon"/>}
             </div>
         </div>
