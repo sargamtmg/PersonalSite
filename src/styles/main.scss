@@ -27,3 +27,6 @@ html::-webkit-scrollbar-thumb{
 html::-webkit-scrollbar-track{
     background-color: $scrollbar_track_color;
 }
+.disable-scrolling{
+    overflow: hidden;
+}

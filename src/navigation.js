@@ -1,36 +1,57 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { NavLink } from "react-router-dom";
 
 const Nav = (props) =>{
-    let items = ['About Me','Skill','Projects','Hobby','Game','Contact'];
+    //let items = ['About Me','Skill','Projects','Hobby','Game','Contact'];
+
+    const [isNavOpen,setIsNavOpen] = useState(false);
+    
+    const toggleIsNavOpen = ()=>{
+        isNavOpen ? enable_scroll() : disable_scroll();
+        setIsNavOpen(!isNavOpen);
+    }
+
+    const disable_scroll = ()=>{
+        document.body.classList.add('disable-scrolling');
+    }
+
+    const enable_scroll = ()=>{
+        document.body.classList.remove('disable-scrolling');
+    }
+
     return(
         <div className="nav">
             <div className="logo"></div>
-            <ul className="nav-ul">
+            <ul className={`nav-ul ${isNavOpen? 'nav_active':''}`}>
                 <li className="nav-li">
-                    <Link to="/" className="navList">Homepage</Link>
+                    <NavLink to="/" className="navList" activeClassName="active" onClick={toggleIsNavOpen}>Homepage</NavLink>
                 </li>
                 <li className="nav-li">
-                    <Link to="/aboutMe" className="navList">About Me</Link>
+                    <NavLink to="/aboutMe" className="navList" activeClassName="active" onClick={toggleIsNavOpen}>About Me</NavLink>
                 </li>
                 <li className="nav-li">
-                    <Link to='/skill' className="navList">Skill</Link>
+                    <NavLink to='/skill' className="navList" activeClassName="active" onClick={toggleIsNavOpen}>Skill</NavLink>
                 </li>
                 <li className="nav-li">
-                    <Link to='/projects' className="navList">Projects</Link>
+                    <NavLink to='/projects' className="navList" activeClassName="active" onClick={toggleIsNavOpen}>Projects</NavLink>
                 </li>
                 <li className="nav-li">
-                    <Link to='/hobby' className="navList">Hobby</Link>
+                    <NavLink to='/hobby' className="navList" activeClassName="active" onClick={toggleIsNavOpen}>Hobby</NavLink>
                 </li>
                 {props.gameInclude &&
                 <li className="nav-li">
-                    <Link to='/game' className="navList">Game</Link>
+                    <NavLink to='/game' className="navList" activeClassName="active" onClick={toggleIsNavOpen}>Game</NavLink>
                 </li>
                 }
                 <li className="nav-li">
-                    <Link to='/Contact' className="navList">Contacts</Link>
+                    <NavLink to='/Contact' className="navList" activeClassName="active" onClick={toggleIsNavOpen}>Contacts</NavLink>
                 </li>
             </ul>
+            <div className="triple_bar" onClick={toggleIsNavOpen}>
+                {isNavOpen ? <FontAwesomeIcon icon={faXmark} className="nav_icon"/> : <FontAwesomeIcon icon={faBars} className="nav_icon"/>}
+            </div>
         </div>
     );
 }
