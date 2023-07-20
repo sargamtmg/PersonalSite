@@ -90,7 +90,7 @@ const About_me = () => {
                     trigger:'.experience_section',
                     start:'top 75%',
                     end:'top 70%',
-                    markers: true,
+                    //markers: true,
                     onEnter: func_animate,
                     onEnterBack: func_animate
                 });
@@ -211,10 +211,10 @@ const About_me = () => {
                     model.current.name = 'graduation';
                     //model.current.scale.set(3,3,3);
                     model.current.scale.set(0,0,0);
-                    // window.scrollBy({
-                    //     top: -window.innerHeight * 0.3,
-                    //     behavior: "smooth"
-                    // });
+                    window.scrollBy({
+                        top: -window.innerHeight * 0.3,
+                        behavior: "smooth"
+                    });
                     await moving_in_animation();
                     model.current.scale.set(4.5,4.5,4.5);
                     enableScroll();
@@ -232,10 +232,10 @@ const About_me = () => {
                 model.current.name = 'home_office';
                 //model.current.scale.set(4.5,4.5,4.5);
                 model.current.scale.set(0,0,0);
-                // window.scrollBy({
-                //     top: window.innerHeight * 0.3,
-                //     behavior: "smooth"
-                // });
+                window.scrollBy({
+                    top: window.innerHeight * 0.6,
+                    behavior: "smooth"
+                });
                 await moving_in_animation();
                 model.current.scale.set(4,4,4);
                 enableScroll();
