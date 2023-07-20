@@ -9,6 +9,9 @@
         width: 45%;
         height: 70%;
         // background-color: pink;
+        @media only screen and (max-width: $break-sm-width) {
+            display: none;
+        }
         .gamecanvas{
             width: 100%;
             height:100%;
@@ -17,20 +20,21 @@
     .aboutme_detail{
         width: 55%;
         height: 100%;
-        //flex-grow: 1;
         //background-color: beige;
+        @media only screen and (max-width: $break-sm-width) {
+            width: 100%;
+        }
         .aboutme_section_wrapper{
             display: flex;
             flex-direction: column;
             width:100%;
-            height: 300%;
+            height:200%;
+            scroll-snap-type: y mandatory;
             .aboutme_detail_section{
                 width: 100%;
                 height:100%;
+                scroll-snap-align:start;
                 //border: 1px solid black;
-            }
-            .more_section{
-                //background-color:khaki;
             }
         }
     }
@@ -38,8 +42,25 @@
 
 .education_section{
     display:flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    .graduation_image{
+        display: none;
+        width:45vw;
+        height:30vw;
+        //background-color: aquamarine;
+        background-image: url('../../img/about_me/graduation_no_bg.png');
+        background-size: cover;
+        background-position: center center;
+        @media only screen and (max-width: $break-sm-width) {
+            display: block;
+        }
+        @media only screen and (max-width: $break-xsm-width) {
+            width:60vw;
+            height:40vw;
+        }
+    }
     .edu_detail{
         width:100%;
         height:45%;
@@ -53,6 +74,9 @@
             font-size: 40px;
             display: flex;
             align-items: center;
+            @media only screen and (max-width: $break-xsm-width) {
+                font-size:30px;
+            }
         }
         .edu_contain{
             display: flex;
@@ -67,12 +91,24 @@
                 // background-color: azure;
                 height: 40%;
                 .timeline{
-                    width:20%;
+                    width:16%;
                     font-size: medium;
                     color: #555555;
                     display: flex;
                     justify-content: flex-end;
                     margin-right: 5%;
+                    min-width: 80px;
+                    @media only screen and (max-width: $break-lg-width) {
+                        width: 20%;
+                    }
+                    @media only screen and (max-width: $break-tab-port-width) {
+                        width: 24%;
+                    }
+                    @media only screen and (max-width: $break-xsm-width) {
+                        font-size:small;
+                        margin-right: 3%;
+                        min-width: 62px;
+                    }
                 }
                 .edu_detail_name_faculty{
                     display: flex;
@@ -83,11 +119,19 @@
                         font-family: Arial, Helvetica, sans-serif;
                         font-size: large;
                         font-weight: bold;
+                        line-height: 1.2rem;
+                        @media only screen and (max-width: $break-xsm-width) {
+                            font-size:medium;
+                            line-height: 1.1rem;
+                        }
                     }
                     .edu_faculty{
                         align-self: flex-start;
                         font-size: 15px;
                         color: #222222;
+                        @media only screen and (max-width: $break-xsm-width) {
+                            font-size:small;
+                        }
                     }
                 }
             }
@@ -97,8 +141,25 @@
 
 .experience_section{
     display:flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    .home_office_image{
+        display: none;
+        width:45vw;
+        height:30vw;
+        //background-color: aquamarine;
+        background-image: url('../../img/about_me/home_office_no_bg.png');
+        background-size: cover;
+        background-position: center center;
+        @media only screen and (max-width: $break-sm-width) {
+            display: block;
+        }
+        @media only screen and (max-width: $break-xsm-width) {
+            width:60vw;
+            height:40vw;
+        }
+    }
     .experience_detail_wrapper{
         width:80%;
         height:45%;
@@ -107,12 +168,21 @@
         justify-content: center;
         align-items: center;
         //background-color: aquamarine;
+        @media only screen and (max-width: $break-tab-port-width) {
+            width:90%;
+        }
+        @media only screen and (max-width: $break-xsm-width) {
+            width:100%;
+        }
         .exp_header{
             height: 25%;
             font-family: 'Lora-Bold';
             font-size: 40px;
             display: flex;
             align-items: center;
+            @media only screen and (max-width: $break-xsm-width) {
+                font-size:30px;
+            }
         }
         .exp_contain{
             display: flex;
@@ -132,24 +202,36 @@
                     .company_logo_wrapper{
                         // background-color: burlywood;
                         .company_logo{
-                            width:3vw;
+                            width:30px;
                             aspect-ratio: 1/1;
                             background-image: url('../../img/logo/national_pen.png');
                             background-size: cover;
                             border-radius: 50%;
                             margin:0 4vw 0 0;
+                            @media only screen and (max-width: $break-xsm-width) {
+                                font-size:25px;
+                            }
                         }
                     }
                     .company_name{
-                        font-size: 30px;
+                        font-size: 2rem;
                         font-weight: bold;
                         position:relative;
                         right:3vw;
+                        @media only screen and (max-width: $break-xsm-width) {
+                            font-size:1.5rem;
+                        }
                     }
                 }
                 .exp_position{
-                    font-size: 15px;
+                    font-size: 1.2rem;
                     font-weight: bold;
+                    @media only screen and (max-width: $break-lg-width) {
+                        font-size:1.05rem;
+                    }
+                    @media only screen and (max-width: $break-xsm-width) {
+                        font-size:0.8rem;
+                    }
                 }
                 .exp_duration{
                     font-size: 10px;
@@ -158,12 +240,12 @@
             .my_role{
                 color:#555555;
                 text-align: center;
+                font-size: 1rem;
+                line-height: 1.2rem;
+                @media only screen and (max-width: $break-xsm-width) {
+                    font-size:0.9rem;
+                }
             }
         }
     }
-}
-
-.stopScroll{
-    width: 100vw;
-    overflow: hidden;
 }
