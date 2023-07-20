@@ -10,7 +10,7 @@
     justify-content: space-between;
     align-items: center;
     .logo{
-        background-image: url('../../img/logo/logo2.png');
+        background-image: url('../../img/logo/logo.png');
         background-size: cover;
         background-repeat: no-repeat;
         width:12vh;
@@ -59,6 +59,10 @@
     border-radius: 5px;
     @media only screen and (max-width: $break-sm-width) {
         padding:3vh;
+    }
+
+    @media only screen and (max-width: $break-xsm-width) {
+        padding:2vh;
     }
 }
 
