@@ -10,9 +10,7 @@ const About_me = () => {
 
     const isAssetloaderAsyncExecutedRef = useRef(false); //to ensure assetloader load sync func to execute once in strictmode too
     const canvas_mountRef = useRef(null);
-
     const model = useRef(null);
-
     const scene = useRef(null) ;
     const assestloader = useRef(null);
     const renderer = useRef(null);
