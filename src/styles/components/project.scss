@@ -1,3 +1,10 @@
+
+.project_canvas{
+    display: block;
+    @media only screen and (max-width: $break-sm-width){
+        display: none;
+    }
+}
 .modal{
     position:absolute;
     bottom: 0;
@@ -23,4 +30,25 @@
     }
 }
 
-#gui { position: absolute; top: 14%; right: 5%; }
+.project_canvas_mobile{
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    @media only screen and (max-width: $break-sm-width){
+        display: flex;
+    }
+    .project_detail{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        margin-top: 5%;
+        .project_image_mobile{
+            width: 30%;
+            background-color: aquamarine;
+            @media only screen and (max-width: $break-xsm-width){
+                width: 40%;
+            }
+        }
+    }
+}

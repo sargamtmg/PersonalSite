@@ -22,12 +22,28 @@ const Projects = () => {
     const assestloader = useRef(null);
 
     const [isModalOpen,setisModalOpen] = useState(false);
-    const selectedObfRef = useRef(null);
+    const selectedObjRef = useRef(null);
     const initialSelectedPosRef = useRef(null);
     const isAssetloaderAsyncExecutedRef = useRef(false);
     const img1 = useRef(null);
     const img2 = useRef(null);
     const img3 = useRef(null);
+
+    const projectArray = [
+        {
+            name:'intercode',
+            image: intercodeImg
+        },
+        {
+            name:'text_recog',
+            image: textRecogImg
+        },
+        {
+            name:'city_event',
+            image: textRecogImg
+        }
+    ];
+
 
     // const axeshelper = new THREE.AxesHelper(10);
     // scene.add(axeshelper);
@@ -87,27 +103,12 @@ const Projects = () => {
         img2.current.userData.name = 'text_recog';
         sceneRef.current.add(img2.current);
 
-        // const gui = new dat.GUI();
-        // //gui.domElement.id = 'gui';
-
-        // const options = {
-        //     pointLightColor : '#ffa500',
-        //     pointIntensity : 1,
-        //     color: '#0000ff',
-        //     intensity: 1,
-        //     distance:1,
-        //     angle: Math.PI/2,
-        //     penumbra: 2,
-        //     decay: 1,
-        //     ypos:0
-        // }
-
         const image_plane_geo3 = new THREE.PlaneGeometry(3,3);
         const mat_img3 = new THREE.MeshStandardMaterial({color:'#ffffff',map:texture});
         img3.current = new THREE.Mesh(image_plane_geo3,mat_img3);
         img3.current.position.set(10,2,0.4);
         img3.current.name='image_frame';
-        img3.current.userData.name = 'city_event'
+        img3.current.userData.name = 'city_event';
         sceneRef.current.add(img3.current);
 
         const spotLight = new THREE.SpotLight(0xffffff,1.4,0,0.2,0.2,0);
@@ -130,6 +131,21 @@ const Projects = () => {
 
         const ambientlight = new THREE.AmbientLight(0xffffff,0.3);
         sceneRef.current.add(ambientlight);
+
+        // const gui = new dat.GUI();
+        // //gui.domElement.id = 'gui';
+
+        // const options = {
+        //     pointLightColor : '#ffa500',
+        //     pointIntensity : 1,
+        //     color: '#0000ff',
+        //     intensity: 1,
+        //     distance:1,
+        //     angle: Math.PI/2,
+        //     penumbra: 2,
+        //     decay: 1,
+        //     ypos:0
+        // }
 
         // gui.addColor(options, 'color').onChange((e) => {
         //     spotLight.color.set(e);
@@ -208,7 +224,7 @@ const Projects = () => {
         }
     }
 
-    const movePointer = (event) =>{
+    const checkObjClicked = (event) =>{
         if(!isModalOpen){
             // const canvas = document.getElementById('demo');
             // const dim = canvas.getBoundingClientRect();
@@ -227,44 +243,27 @@ const Projects = () => {
             if(intersects.length){
                 for(let i=0;i<intersects.length;i++){
                     console.log(intersects.length);
-                    console.log(intersects[i].object.geometry.type);
-                    console.log(intersects[i].object);
                     if(intersects[i].object.name==='image_frame'){
                         //intersects[i].object.material.color.set(0x267070);
                         const obj = intersects[i].object;
-                        selectedObfRef.current=obj;
-                        initialSelectedPosRef.current = selectedObfRef.current.position.clone();
-                        console.log('initial position z: '+initialSelectedPosRef.current.z);
+                        selectedObjRef.current=obj;
+                        console.log('project name: '+selectedObjRef.current.userData.name)
+                        initialSelectedPosRef.current = selectedObjRef.current.position.clone();
                         let camerapos = cameraRef.current.position.clone();
 
                         //console.log('end camera quaternion + '+camera.x+' '+camera.y+' '+camera.z+''+camera.w);
-                        gsap.to(selectedObfRef.current.position,{
-                            duration: 1,
+                        gsap.to(selectedObjRef.current.position,{
+                            duration: 0.6,
                             x:camerapos.x-5,
                             y: camerapos.y+1,
                             z:camerapos.z-7,
                             onUpdate: ()=>{
-                                selectedObfRef.current.lookAt(camerapos.x-5,camerapos.y+1,camerapos.z-2);
+                                selectedObjRef.current.lookAt(camerapos.x-5,camerapos.y+1,camerapos.z-2);
                             },
                             onComplete: ()=>{
                                 openModal();
                             }
                         });
-                        // .to(selectedObfRef.current.position,{
-                        //     duration: 1,
-                        //     x:camerapos.x-1,                                
-                        //     y: camerapos.y,
-                        //     z:camerapos.z-4,
-                        //     onUpdate: ()=>{
-                        //         selectedObfRef.current.lookAt(camerapos.x-1,camerapos.y,camerapos.z-4);
-                        //     },
-                        //     onComplete: ()=>{
-                        //         selectedObfRef.current.lookAt(camerapos.x-1,camerapos.y,camerapos.z-2);
-                        //         openModal();
-                        //     }
-                        // });
-
-                        console.log('final position z: '+initialSelectedPosRef.current.z);
                     }
                 }
                 //camera.position.set(obj.position.x,obj.position.y+1,obj.position.z+3);
@@ -284,17 +283,13 @@ const Projects = () => {
     const closeModal = () =>{
         console.log('modal should be close');
         setisModalOpen(false);
-        if(selectedObfRef.current && initialSelectedPosRef.current)
+        if(selectedObjRef.current && initialSelectedPosRef.current)
         {
-            console.log('initial position z in closeModal: '+ initialSelectedPosRef.current.z);
-            gsap.to(selectedObfRef.current.position,{
-                duration: 1,
+            gsap.to(selectedObjRef.current.position,{
+                duration: 0.6,
                 x: initialSelectedPosRef.current.x,
                 y: initialSelectedPosRef.current.y,
                 z: initialSelectedPosRef.current.z,
-                onUpdate: ()=>{
-                    selectedObfRef.current.lookAt(selectedObfRef.current.x,selectedObfRef.current.y,0);
-                },
                 onComplete: () => {
                     orbitRef.current.enabled = true; // Enable orbitRef.currentControls after the animation is complete
                   }
@@ -304,16 +299,26 @@ const Projects = () => {
 
     return(
         <>
-            <div className='project_canvas' ref={canvasRef} onClick={movePointer}></div>
+            <div className='project_canvas' ref={canvasRef} onClick={checkObjClicked}></div>
             {
-                isModalOpen && 
+                isModalOpen &&
                 <div className="modal">
                     <div className="modal_content_wrapper">
                         <FontAwesomeIcon icon={faXmark} className="cross" onClick={closeModal}/>
-                        <ProjectSelector project_name={selectedObfRef.current.userData.name} className='Project_content'/>
+                        <ProjectSelector project_name={selectedObjRef.current.userData.name} className='Project_content'/>
                     </div>
                  </div>
             }
+            <div className="project_canvas_mobile">
+                {                    
+                    projectArray.map((data) => (
+                      <div key={data.name} className="project_detail">
+                        <img className="project_image_mobile" src={data.image} alt={data.name} />
+                        <ProjectSelector className="project_contain" project_name={data.name} />
+                      </div>
+                    ))
+                }
+            </div>
         </>
     );
 }

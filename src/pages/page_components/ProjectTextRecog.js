@@ -3,7 +3,7 @@ import React from 'react';
 const ProjectTextRecog = () =>{
     return(
         <>
-            <h1>Hi Project Intercode here</h1>
+            <h1>Hi Project Text-recog here</h1>
         </>
     )
 }
