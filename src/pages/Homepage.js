@@ -4,7 +4,7 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 import { Link } from "react-router-dom";
 import {motion} from "framer-motion";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faDownload} from "@fortawesome/free-solid-svg-icons"
+import {faDownload, faArrowRightLong} from "@fortawesome/free-solid-svg-icons"
 import resume_doc from '../documents/Sargam_Resume.pdf';
 import sletterTop from '../img/homepage/sletterTop.png';
 import sletterMiddle from '../img/homepage/sletterMiddle.png';
@@ -13,16 +13,22 @@ import scrollDown from '../img/logo/scroll_down.png';
 
 const Homepage = () =>{
     let heroLayerRef = useRef(null);
-    let myref2 = useRef(null);
+    let aboutMeLayerRef = useRef(null);
     let myref3 = useRef(null);
     let letterT_Ref = useRef(null);
 
     gsap.registerPlugin(ScrollTrigger);
 
-    let intro_data={
+    let intro_data = {
         name: 'I\'m Sargam Tamang',
         position: 'Full Stack Developer',
         content: 'I am currently seeking for new career opportunities, and if my work resonates with you, I would love to connect and discuss potential collaborations.'
+    }
+
+    let aboutMe_data = {
+        tittle: 'About Me',
+        content: 'I have experience as a Software Engineer for around year and a half. I have been actively engaged in both backend and frontend development, predominantly utilizing Node.js and React.js technologies. In addition to my primary focus, I have also keen interest in exploring other domains such as machine learning and mobile app development.',
+        moreMe: 'Know More About Me '
     }
 
     useEffect(()=>{
@@ -164,31 +170,28 @@ const Homepage = () =>{
 
     window.addEventListener('scroll', ()=>{
         //if(!myref.current || !myref2.current || !myref3.current) return;
-        let value = window.scrollY;
         let hero;
         if(heroLayerRef.current){
             hero = heroLayerRef.current.getBoundingClientRect();
         }
         const transe = document.querySelector('#transid');
-        const yellowe = document.querySelector('#yellowid');
-        let yellow = yellowe.getBoundingClientRect();
         const purplee = document.querySelector('.purple');
         let purple = purplee.getBoundingClientRect();
         const navChild = document.querySelector('.navChild');
         if(hero.bottom > 0 )
         {
-            yellowe.classList.add('fixedToTop');
+            aboutMeLayerRef.current.classList.add('fixedToTop');
             transe.classList.remove('hide');
             navChild.classList.remove('stickyToTop');
             if(hero.bottom <= window.innerHeight*0.1){//75
                 navChild.classList.add('stickyToTop');
-                yellowe.classList.remove('fixedToTop');
+                aboutMeLayerRef.current.classList.remove('fixedToTop');
                 transe.classList.add('hide');
             }
         }
         else if(hero.bottom <= 0){
             navChild.classList.add('stickyToTop');
-            yellowe.classList.remove('fixedToTop');
+            aboutMeLayerRef.current.classList.remove('fixedToTop');
             transe.classList.add('hide');
         }
         let scrollIcon = document.querySelector('.scrolldown');
@@ -234,12 +237,21 @@ const Homepage = () =>{
                 </div>
             </div>
             <div className={window.scrollY===0 ? 'scrolldown':'scrolldown hide'}><img src={scrollDown} alt="scroll down" width='15%'></img></div>
-            <div className='yellow layer fixedToTop' id='yellowid' ref={myref2}>
-                I am YELLOWs
-                <div>Essay topics in</div>
+            <div className='aboutMelayer layer fixedToTop' ref={aboutMeLayerRef}>
+                <div className='aboutMe_card'>
+                    <div className='aboutMe_card_img_wrapper'>
+                        <div className='aboutMe_card_img'></div>
+                    </div>
+                    <div className='aboutMe_card_detail'>
+                        <div className='aboutMe_card_tittle'>{aboutMe_data.tittle}</div>
+                        <div className='aboutMe_card_content_wrapper'>
+                            <div className='aboutMe_card_content'>{aboutMe_data.content}</div>
+                        </div>
+                    </div>
+                    <Link to="/aboutMe"><div className='aboutMeLink'>{aboutMe_data.moreMe}<FontAwesomeIcon icon={faArrowRightLong} /></div></Link>
+                </div>
             </div>
             <div className='trans layer' id='transid' ref ={myref3}>
-                I am-------------------- transparent.
             </div>
         </motion.div>
             <div className='view2'>

@@ -148,9 +148,131 @@
 
 /* first layer end */
 
-.yellow{
-  background-image: linear-gradient(#201f1f 10%,$black-bg-color);
-  color: white;
+.aboutMelayer{
+  background-color: white;
+  color:black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .aboutMe_card{
+    display: flex;
+    flex-direction:row-reverse;
+    width: 80%;
+    height: 60%;
+    position: relative;
+    top:5%;
+    @media only screen and (max-width: $break-tab-port-width){
+      width: 90%;
+    }
+    @media only screen and (max-width: $break-sm-width){
+      flex-direction: column;
+      align-items: center;
+      height: 95%;
+      width: 90%;
+      top:0px;
+    }
+    @media only screen and (max-width: $break-sm-width){
+      width: 100%;
+    }
+    .aboutMe_card_detail{
+      display: flex;
+      flex-direction: column;
+      width: 65%;
+      height: 100%;
+      align-items: center;
+      @media only screen and (max-width: $break-sm-width){
+        width: 100%;
+        height:65%
+      }
+      .aboutMe_card_tittle{
+        height: 20%;
+        width: 100%;
+        font-size: 4.2rem;
+        font-weight: bolder;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        //background-color: bisque;
+        @media only screen and (max-width: $break-tab-port-width){
+          font-size: 3.5rem;
+        }
+        @media only screen and (max-width: $break-sm-width){
+          font-size: 3.5rem;
+          height: 10%;
+          font-size: 2.5rem;
+        }
+      }
+      .aboutMe_card_content_wrapper{
+        width: 100%;
+        height: 80%;
+        font-size: 1.2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        @media only screen and (max-width: $break-sm-width){
+          height: 90%;
+          align-items: flex-start;
+          padding-top: 10%;
+        }
+        //background-color: aquamarine;
+        .aboutMe_card_content{
+          width: 85%;
+          font-size: 1.2rem;
+          line-height: 1.7rem;
+          @media only screen and (max-width: $break-tab-port-width){
+            font-size: 1.2rem;
+            line-height: 1.3rem;
+          }
+          @media only screen and (max-width: $break-sm-width){
+            width: 90%;
+            font-size: 1.1rem;
+            line-height: 1.2rem;
+          }
+        }
+      }
+    }
+    .aboutMe_card_img_wrapper{
+      width:35%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      @media only screen and (max-width: $break-sm-width){
+        width: 90%;
+        height: 35%;
+      }
+      .aboutMe_card_img{
+        width: 100%;
+        aspect-ratio: 1/1;
+        background-image: url('../../img/homepage/aboutMe_img.jpg');
+        background-size: cover;
+        background-position: center center;
+        @media only screen and (max-width: $break-sm-width){
+          height: 100%;
+          width: auto;
+          aspect-ratio:1/1;
+        }
+      }
+    }
+    .aboutMeLink{
+      color:$orange-color;
+      position: absolute;
+      bottom: 5%;
+      left: 5%;
+      font-size: 1.5rem;
+      font-weight: 500;
+      &:hover{
+        font-weight:bold;
+      }
+      @media only screen and (max-width: $break-tab-port-width){
+        font-size: 1.3rem;
+      }
+      @media only screen and (max-width: $break-sm-width){
+        bottom: 3%;
+        height: 3%;
+      }
+    }
+  }
 }
 
 .purple{
