@@ -263,16 +263,18 @@
     .img_wrapper{
         width: 40%;
         height:100%;
-        //background-color: azure;
         display: flex;
         align-items: center;
         justify-content: center;
+        position: relative;
         .hobby_img{
             height:80%;
             aspect-ratio: 1/1;
+            transform: scale(0.7);
             box-shadow: 3px 5px 8px black;
             background-size: cover;
             background-position: center center;
+            background-color: aquamarine;
             @media only screen and (max-width: $break-xsm-width) {
                 width: 100%;
             }
@@ -368,7 +370,23 @@
             }
             .trek_img_wrapper{
                 .trek_img{
-                    background-image: url('../../img/about_me/trek.jpeg');
+                    position: absolute;
+                    left: 5%;
+                    transform: rotate(-15deg) scale(0.7);
+                    background-image: url('../../img/about_me/trek1.jpeg');
+                }
+                .trek_img2{
+                    position: relative;
+                    top:-5%;
+                    transform:scale(0.7);
+                    background-image: url('../../img/about_me/trek2.jpeg');
+                }
+                .trek_img3{
+                    position: absolute;
+                    right:5%;
+                    z-index: 2;
+                    transform: rotate(15deg) scale(0.7);
+                    background-image: url('../../img/about_me/trek3.jpeg');
                 }
             }
             .trek_content{
@@ -385,7 +403,23 @@
             }
             .dance_img_wrapper{
                 .dance_img{
-                    background-image: url('../../img/about_me/trek.jpeg');
+                    position: absolute;
+                    left: 5%;
+                    transform: rotate(-15deg) scale(0.7);
+                    background-image: url('../../img/about_me/dance1.jpeg');
+                }
+                .dance_img2{
+                    position: relative;
+                    top:-5%;
+                    transform:scale(0.7);
+                    background-image: url('../../img/about_me/dance2.jpeg');
+                }
+                .dance_img3{
+                    position: absolute;
+                    right:5%;
+                    z-index: 2;
+                    transform: rotate(15deg) scale(0.7);
+                    background-image: url('../../img/about_me/dance3.jpeg');
                 }
             }
             .dance_content{

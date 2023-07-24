@@ -324,6 +324,8 @@ const About_me = () => {
                     <div className="trek_wrapper section_wrapper">
                         <div className="trek_img_wrapper img_wrapper">
                             <div className="trek_img hobby_img"></div>
+                            <div className="trek_img2 hobby_img"></div>
+                            <div className="trek_img3 hobby_img"></div>
                         </div>
                         <div className="trek_content hobby_content">
                             <div className="content_tittle">{hobby_data.trek_tittle}</div>
@@ -333,6 +335,8 @@ const About_me = () => {
                     <div className="dance_wrapper section_wrapper">
                         <div className="dance_img_wrapper img_wrapper">
                             <div className="dance_img hobby_img"></div>
+                            <div className="dance_img2 hobby_img"></div>
+                            <div className="dance_img3 hobby_img"></div>
                         </div>
                         <div className="dance_content hobby_content">
                             <div className="content_tittle">{hobby_data.dance_tittle}</div>
