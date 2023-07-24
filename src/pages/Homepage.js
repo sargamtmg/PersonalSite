@@ -292,11 +292,11 @@ const Homepage = () =>{
                         <div className='social_media'>
                             <div className='handle_wrapper'>
                                 <div className='handle_collection'>
-                                    <a href='https://www.youtube.com/' target='_blank' className='fb handles'></a>
+                                    <a href='https://www.facebook.com/sargam.tamang.7798' target='_blank' className='fb handles'></a>
                                     <a href='https://www.linkedin.com/in/sargam-tamang-9412a8189/' target='_blank' className='ln handles'></a>
                                 </div>
                                 <div className='handle_collection'>
-                                    <a href ='#' target='_blank' className='insta handles'></a>
+                                    <a href ='https://www.instagram.com/sargam.tamang/' target='_blank' className='insta handles'></a>
                                     <a href='https://github.com/sargamtmg' target='_blank' className='git handles'></a>
                                 </div>
                             </div>
