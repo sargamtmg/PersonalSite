@@ -12,7 +12,7 @@ import sletterBottom from '../img/homepage/sletterBottom.png';
 import scrollDown from '../img/logo/scroll_down.png';
 
 const Homepage = () =>{
-    let myref = useRef(null);
+    let heroLayerRef = useRef(null);
     let myref2 = useRef(null);
     let myref3 = useRef(null);
     let letterT_Ref = useRef(null);
@@ -165,26 +165,28 @@ const Homepage = () =>{
     window.addEventListener('scroll', ()=>{
         //if(!myref.current || !myref2.current || !myref3.current) return;
         let value = window.scrollY;
-        const rede = document.querySelector('#redid');
-        let red = rede.getBoundingClientRect();
+        let hero;
+        if(heroLayerRef.current){
+            hero = heroLayerRef.current.getBoundingClientRect();
+        }
         const transe = document.querySelector('#transid');
         const yellowe = document.querySelector('#yellowid');
         let yellow = yellowe.getBoundingClientRect();
         const purplee = document.querySelector('.purple');
         let purple = purplee.getBoundingClientRect();
         const navChild = document.querySelector('.navChild');
-        if(red.bottom > 0 )
+        if(hero.bottom > 0 )
         {
             yellowe.classList.add('fixedToTop');
             transe.classList.remove('hide');
             navChild.classList.remove('stickyToTop');
-            if(red.bottom <= window.innerHeight*0.1){//75
+            if(hero.bottom <= window.innerHeight*0.1){//75
                 navChild.classList.add('stickyToTop');
                 yellowe.classList.remove('fixedToTop');
                 transe.classList.add('hide');
             }
         }
-        else if(red.bottom <= 0){
+        else if(hero.bottom <= 0){
             navChild.classList.add('stickyToTop');
             yellowe.classList.remove('fixedToTop');
             transe.classList.add('hide');
@@ -218,7 +220,7 @@ const Homepage = () =>{
         exit={{opacity:1}}
         transition={{duration:1}}
         >
-            <div className='red layer' id='redid' ref ={myref}>
+            <div className='hero_layer layer' id='heroid' ref ={heroLayerRef}>
                 <div className='introduction'>
                     <div className='intro_name'>{intro_data.name}</div>
                     <div className='intro_position'>{intro_data.position}</div>

@@ -30,5 +30,6 @@ html::-webkit-scrollbar-track{
 }
 
 .disable-scrolling{
+    width: 100vw;
     overflow: hidden;
 }

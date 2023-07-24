@@ -9,89 +9,118 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 const About_me = () => {
 
     const isAssetloaderAsyncExecutedRef = useRef(false); //to ensure assetloader load sync func to execute once in strictmode too
+    const canvas_wrapperRef = useRef(null);
     const canvas_mountRef = useRef(null);
     const model = useRef(null);
     const scene = useRef(null) ;
     const assestloader = useRef(null);
     const renderer = useRef(null);
 
+    const experience_data = {
+        company_name: 'National Pen',
+        designation: 'SoftWare Engineer (Full Stack Developer)',
+        duration: 'Aug 2021 - Dec 2022',
+        content:'Experienced in Node.js backend, API management, React-based dynamic websites, and UI/UX implementation using SCSS/JavaScript. Proficient in React component testing with Jest/Enzyme and experienced with various AWS services.'
+    }
+
+    const hobby_data = {
+        main_tittle: 'More About Me',
+        trek_tittle: 'Trekking',
+        trek_content: 'Scenic views of glimmering mountains or mist surrounding you in the dense forest, along with the sound of snow crunching underfoot, all fascinate me. Backpack done, tying the shoe, and we are good to go.',
+        dance_tittle: 'Dance and Music',
+        dance_content: 'Best tools to express emotions, from soothing songs of the \'90s to catching up steps with the beats of RnB music, always put smiles on my face. Something where heart and soul unite'
+    }
+
     useEffect(()=>{
-        renderer.current = new THREE.WebGLRenderer({ alpha: true });
-        renderer.current.setClearColor( 0x000000, 0 );
+        if(canvas_wrapperRef.current.offsetParent){
+            renderer.current = new THREE.WebGLRenderer({ alpha: true });
+            renderer.current.setClearColor( 0x000000, 0 );
 
-        canvas_mountRef.current.appendChild(renderer.current.domElement);
-        renderer.current.setSize(canvas_mountRef.current.clientWidth,canvas_mountRef.current.clientHeight);
-        renderer.current.setPixelRatio(window.devicePixelRatio);
+            canvas_mountRef.current.appendChild(renderer.current.domElement);
+            renderer.current.setSize(canvas_mountRef.current.clientWidth,canvas_mountRef.current.clientHeight);
+            renderer.current.setPixelRatio(window.devicePixelRatio);
 
-        scene.current = new THREE.Scene();
+            scene.current = new THREE.Scene();
 
-        const camera = new THREE.PerspectiveCamera(65,window.innerWidth/window.innerHeight);
+            const camera = new THREE.PerspectiveCamera(65,window.innerWidth/window.innerHeight);
 
-        const controls = new OrbitControls(camera,renderer.current.domElement);
-        controls.enableZoom= false;
-        controls.enableRotate = false;
-        camera.position.set(0,4.5,9);
-        controls.update();
+            const controls = new OrbitControls(camera,renderer.current.domElement);
+            controls.enableZoom= false;
+            controls.enableRotate = false;
+            camera.position.set(0,4.5,9);
+            controls.update();
 
-        scene.current.add(new THREE.DirectionalLight(0xFFFFFF,1));
-        addDirectionallightFromFourDir(scene.current);
+            scene.current.add(new THREE.DirectionalLight(0xFFFFFF,1));
+            addDirectionallightFromFourDir(scene.current);
 
-        //addAxis(scene);
-        //addGrid(scene,20);
+            //addAxis(scene);
+            //addGrid(scene,20);
 
-        assestloader.current = new GLTFLoader();
+            assestloader.current = new GLTFLoader();
 
-        let modelUrl = new URL('../assets/graduation.glb',import.meta.url);
-        if(!isAssetloaderAsyncExecutedRef.current){
-            assestloader.current.load(modelUrl.href,async (gltf)=>{
-                model.current = gltf.scene;
-                scene.current.add(model.current);
-                model.current.name = 'graduation';
-                model.current.scale.set(4,4,4);
-            },
-            undefined,
-            (err)=>{
-                console.log('error on modling model err:'+err);
-            });
-            isAssetloaderAsyncExecutedRef.current = true;   // Since useeffect run twice, it prevent this async run to run twice
-        }
-
-        const animate=()=>{
-            renderer.current.render(scene.current,camera);
-        }
-        renderer.current.setAnimationLoop(animate);
-
-        gsap.registerPlugin(ScrollTrigger);
-
-        let ctx = gsap.context(()=>{
-
-            var model_scrollTrigger = {
-                trigger: '.experience_section',
-                start: 'top 99.8%',
-                end: 'top -82%',
-                //markers:true,
-                //scrub: true,
-                pin:'.canvas_wrapper'
-                //toggleActions: 'play pause reverse none',
+            let modelUrl = new URL('../assets/graduation.glb',import.meta.url);
+            if(!isAssetloaderAsyncExecutedRef.current){
+                assestloader.current.load(modelUrl.href,async (gltf)=>{
+                    model.current = gltf.scene;
+                    scene.current.add(model.current);
+                    model.current.name = 'graduation';
+                    model.current.scale.set(4.5,4.5,4.5);
+                },
+                undefined,
+                (err)=>{
+                    console.log('error on modling model err:'+err);
+                });
+                isAssetloaderAsyncExecutedRef.current = true;   // Since useeffect run twice, it prevent this async run to run twice
             }
-            ScrollTrigger.create(
-                model_scrollTrigger
-            );
 
-            ScrollTrigger.create({
-                trigger:'.experience_section',
-                start:'top 75%',
-                end:'top 70%',
-                //markers: true,
-                onEnter: func_animate,
-                onEnterBack: func_animate
+            const animate=()=>{
+                renderer.current.render(scene.current,camera);
+            }
+            renderer.current.setAnimationLoop(animate);
+
+            gsap.registerPlugin(ScrollTrigger);
+
+            let ctx = gsap.context(()=>{
+
+                var model_scrollTrigger = {
+                    trigger: '.experience_section',
+                    start: 'top 99.8%',
+                    end: 'top 10%',
+                    //markers:true,
+                    pin:'.canvas_wrapper'
+                    //toggleActions: 'play pause reverse none',
+                }
+                ScrollTrigger.create(
+                    model_scrollTrigger
+                );
+
+                ScrollTrigger.create({
+                    trigger:'.experience_section',
+                    start:'top 75%',
+                    end:'top 70%',
+                    //markers: true,
+                    onEnter: func_animate,
+                    onEnterBack: func_animate
+                });
+
+                gsap.to('.about_me_wrapper',{
+                    backgroundColor: '#fcb41a',
+                    color:'white',
+                    scrollTrigger:{
+                        trigger: '.hobby',
+                        start: 'top 70%',
+                        end: 'top 20%',
+                        scrub:true,
+                        //markers:true,
+                    }
+                });
             });
-        });
-        const canvasMount = canvas_mountRef.current;
-        return () =>{ 
-            ctx.revert();
-            if(canvasMount){
-                canvasMount.removeChild( renderer.current.domElement);
+            const canvasMount = canvas_mountRef.current;
+            return () =>{ 
+                ctx.revert();
+                if(canvasMount){
+                    canvasMount.removeChild( renderer.current.domElement);
+                }
             }
         }
     },[]);
@@ -103,7 +132,7 @@ const About_me = () => {
       
     // to resize canvas and renderer accordingly(since canvas append render dom)
     window.addEventListener("resize",()=>{
-        if(renderer.current){
+        if(renderer.current && canvas_mountRef.current){
             renderer.current.setSize(canvas_mountRef.current.clientWidth,canvas_mountRef.current.clientHeight);
             console.log('renderer size updated');
         }
@@ -127,23 +156,24 @@ const About_me = () => {
         if (rotateBackTween) {
             rotateBackTween.kill();
         }
-        
-        rotateBackTween = gsap.to(model.current.rotation, {
-            x: 0,
-            y: 0,
-            duration: 2.5,
-            ease: 'power2.out',
-        });
+        if(model.current){
+            rotateBackTween = gsap.to(model.current.rotation, {
+                x: 0,
+                y: 0,
+                duration: 2.5,
+                ease: 'power2.out',
+            });
+        }
     }
 
     // Disable scroll
     function disableScroll() {
-        document.body.classList.add('stopScroll');
+        document.body.classList.add('disable-scrolling');
     }
     
     // // Enable scroll
     function enableScroll() {
-        document.body.classList.remove('stopScroll');
+        document.body.classList.remove('disable-scrolling');
     }
 
     const moving_out_animation = ()=>{
@@ -163,17 +193,19 @@ const About_me = () => {
     const moving_in_animation = async ()=>{
         return new Promise((resolve)=>{
             let animation_in_Interval = setInterval(()=>{
-                model.current.scale.x+=0.2;
-                model.current.scale.y+=0.2;
-                model.current.scale.z+=0.2;
-                console.log(model.current.scale.x);
+                if(model.current){
+                    model.current.scale.x+=0.2;
+                    model.current.scale.y+=0.2;
+                    model.current.scale.z+=0.2;
+                    console.log(model.current.scale.x);
+                }
                 //console.log(model.current.position.x);
-            },20);
+            },15);
 
             setTimeout(()=>{
                 clearInterval(animation_in_Interval);
                 resolve();
-            },400);
+            },300);
         });
     }
 
@@ -182,6 +214,7 @@ const About_me = () => {
         disableScroll();
 
         await moving_out_animation();
+
 
         let first_model_name;
         if(model.current){
@@ -192,18 +225,20 @@ const About_me = () => {
         if(first_model_name==='home_office'){
             modelUrl = new URL('../assets/graduation.glb',import.meta.url);
             assestloader.current.load(modelUrl.href,async (gltf)=>{
-                model.current = gltf.scene;
-                scene.current.add(model.current);
-                model.current.name = 'graduation';
-                //model.current.scale.set(3,3,3);
-                model.current.scale.set(0,0,0);
-                window.scrollBy({
-                    top: -window.innerHeight * 0.3,
-                    behavior: "smooth"
-                });
-                await moving_in_animation();
-                model.current.scale.set(4,4,4);
-                enableScroll();
+                if(model.current){
+                    model.current = gltf.scene;
+                    scene.current.add(model.current);
+                    model.current.name = 'graduation';
+                    //model.current.scale.set(3,3,3);
+                    model.current.scale.set(0,0,0);
+                    window.scrollBy({
+                        top: -window.innerHeight * 0.3,
+                        behavior: "smooth"
+                    });
+                    await moving_in_animation();
+                    model.current.scale.set(4.5,4.5,4.5);
+                    enableScroll();
+                }
             },
             undefined,
             (err)=>{
@@ -218,7 +253,7 @@ const About_me = () => {
                 //model.current.scale.set(4.5,4.5,4.5);
                 model.current.scale.set(0,0,0);
                 window.scrollBy({
-                    top: window.innerHeight * 0.3,
+                    top: window.innerHeight * 0.6,
                     behavior: "smooth"
                 });
                 await moving_in_animation();
@@ -234,50 +269,80 @@ const About_me = () => {
     }
 
     return(
-        <div className='aboutme_wrapper'>
-            <div className="canvas_wrapper">
-                <div id='gamecanvas' className="gamecanvas" ref={canvas_mountRef}></div>
+        <div className="about_me_wrapper">
+            <div className='aboutme_edu_exp'>
+                <div className="canvas_wrapper" ref={canvas_wrapperRef}>
+                    <div id='gamecanvas' className="gamecanvas" ref={canvas_mountRef}></div>
+                </div>
+                <div className="aboutme_detail">
+                    <div className="aboutme_section_wrapper">
+                        <div className="aboutme_detail_section education_section">
+                            <div className="graduation_image"></div>
+                            <div className="edu_detail">
+                                <div className="edu_header">EDUCATION</div>
+                                <div className="edu_contain">
+                                    <div className="edu_detail_wrapper">
+                                        <div className="timeline college_timeline">2017-2021</div>
+                                        <div className="edu_detail_name_faculty college_detail">
+                                            <div className="edu_name college_name">NIT- Allahabad<br></br>(Motilal Nehru National Institute of Technology)</div>
+                                            <div className="edu_faculty college_faculty">Computer Science and engineering</div>
+                                        </div>
+                                    </div>
+                                    <div className="edu_detail_wrapper">
+                                        <div className="timeline higher_timeline">2016</div>
+                                        <div className="edu_detail_name_faculty higher_detail">
+                                            <div className="edu_name higher_name">Global Collegiate Higher Sceondary School</div>
+                                            <div className="edu_faculty higher_faculty">science faculty</div>
+                                        </div>
+                                    </div>   
+                                </div>
+                            </div>
+                        </div>
+                        <div className="aboutme_detail_section experience_section">
+                            <div className="home_office_image"></div>
+                            <div className="experience_detail_wrapper">
+                                <div className="exp_header">EXPERIENCE</div>
+                                <div className="exp_contain">
+                                    <div className="basic_exp_content">
+                                        <div className="company_title">
+                                            <div className="company_logo_wrapper"><div className="company_logo"></div></div>
+                                            <div className="company_name">{ experience_data.company_name }</div>
+                                        </div>
+                                        <div className="exp_position">{experience_data.designation}</div>
+                                        <div className="exp_duration">{experience_data.duration}</div>
+                                    </div>
+                                    <div className="my_role">{experience_data.content}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div className="aboutme_detail">
-                <div className="aboutme_section_wrapper">
-                    <div className="aboutme_detail_section education_section">
-                        <div className="edu_detail">
-                            <div className="edu_header">EDUCATION</div>
-                            <div className="edu_contain">
-                                <div className="edu_detail_wrapper">
-                                    <div className="timeline college_timeline">2017-2021</div>
-                                    <div className="edu_detail_name_faculty college_detail">
-                                        <div className="edu_name college_name">NIT- Allahabad<br></br>(Motilal Nehru National Institute of Technology)</div>
-                                        <div className="edu_faculty college_faculty">Computer Science and engineering</div>
-                                    </div>
-                                </div>
-                                <div className="edu_detail_wrapper">
-                                    <div className="timeline higher_timeline">2016</div>
-                                    <div className="edu_detail_name_faculty higher_detail">
-                                        <div className="edu_name higher_name">Global Collegiate Higher Sceondary School</div>
-                                        <div className="edu_faculty higher_faculty">science faculty</div>
-                                    </div>
-                                </div>   
-                            </div>
+            <div className="hobby">
+                <div className="hobby_wrapper">
+                    <div className="hobby_main_heading">{hobby_data.main_tittle}</div>
+                    <div className="trek_wrapper section_wrapper">
+                        <div className="trek_img_wrapper img_wrapper">
+                            <div className="trek_img hobby_img"></div>
+                            <div className="trek_img2 hobby_img"></div>
+                            <div className="trek_img3 hobby_img"></div>
+                        </div>
+                        <div className="trek_content hobby_content">
+                            <div className="content_tittle">{hobby_data.trek_tittle}</div>
+                            <div className="content">{hobby_data.trek_content}</div>
                         </div>
                     </div>
-                    <div className="aboutme_detail_section experience_section">
-                        <div className="experience_detail_wrapper">
-                            <div className="exp_header">EXPERIENCE</div>
-                            <div className="exp_contain">
-                                <div className="basic_exp_content">
-                                    <div className="company_title">
-                                        <div className="company_logo_wrapper"><div className="company_logo"></div></div>
-                                        <div className="company_name">National Pen</div>
-                                    </div>
-                                    <div className="exp_position">Software Engineer (Full Stack Developer)</div>
-                                    <div className="exp_duration">Aug 2021 - Dec 2022</div>
-                                </div>
-                                <div className="my_role">Experienced in Node.js backend development, API management, UI/UX implementation, and dynamic website development using React, CSS, and JavaScript. Skilled in problem-solving, root cause analysis, and troubleshooting to resolve order-related technical issues. Proficient in Jest and Enzyme for comprehensive React component testing</div>
-                            </div>
+                    <div className="dance_wrapper section_wrapper">
+                        <div className="dance_img_wrapper img_wrapper">
+                            <div className="dance_img hobby_img"></div>
+                            <div className="dance_img2 hobby_img"></div>
+                            <div className="dance_img3 hobby_img"></div>
+                        </div>
+                        <div className="dance_content hobby_content">
+                            <div className="content_tittle">{hobby_data.dance_tittle}</div>
+                            <div className="content">{hobby_data.dance_content}</div>
                         </div>
                     </div>
-                    <div className="aboutme_detail_section more_section"></div>
                 </div>
             </div>
         </div>
