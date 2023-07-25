@@ -1,5 +1,6 @@
 import React,{useEffect,useRef} from 'react';
 import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import ScrollToTop from './pages/page_components/ScrollToTop';
 import Nav from './navigation';
 import AboutMe from './pages/About_me';
 import Contacts from './pages/Contact';
@@ -19,6 +20,7 @@ const MainPage = () => {
             <div className='navChild stickyToTop'>
                 <Nav gameInclude={gameInclude}/>
             </div>
+            <ScrollToTop />
             <Routes>
                 <Route path="/" element={<Homepage />} />
                 <Route path="/aboutMe" element={<AboutMe />} />

@@ -3,86 +3,181 @@
 --orange-color : #FF630
 --lightorange-color : #FF9900 */
 
-/* Contact form start */
+.envelop_wrapper{
+  height: 90vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-y: hidden;
+  background-color: aliceblue;
+}
 
-form{
-    align-items: center;
-    justify-content: center;
+.envelop{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width:70%;
+  max-width: 800px;
+  height:90%;
+  top:20%;
+  @media only screen and (max-width: $break-tab-port-width) {
+    width:85%;
   }
-  
-  input, textarea{
-    width:40%;
-    margin-bottom: 20px;
+  @media only screen and (max-width: $break-sm-width) {
+    width:100%;
   }
-  
-  /* Contact Form End */
-  
-  /* envelop start */
-  
-  .envelop{
+  .env_top_side{
+    width:100%;
+    height:34%;
+    transform-style: preserve-3d;
+  }
+  .env_body{
+    width: 100%;
+    height:66%;
+    border-radius: 0px 0px 20px 20px;
+    position:relative;
+    transform-style: preserve-3d;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    position: relative;
-    transition-duration: 3s;
+    z-index: 1;
+    .feedback_form{
+      width: 90%;
+      height: 80%;;
+      z-index: 2;
+      transform: rotateZ(-5deg);
+      position: relative;
+      top:-85%;
+      box-shadow: 0 4px 8px;
+    }
+    .envelop_bg{
+      width:100%;
+      height:100%;
+      background-color: #267b9e;
+      position: absolute;
+      border-radius: 0 0 3% 3%;
+      top:0;
+    }
+    .open_envelop{
+      width: 100%;
+      height:100%;
+      backface-visibility: hidden;
+      position:absolute;
+      z-index: 3;
+      top:0;
+    }
   }
-  
-  .feedback_form{
-    background-color: rgb(204, 204, 204);
-    width: 45vw;
-    height: 35vh;
-    position:absolute;
-    top: 0vh;
-    z-index: 3;
-    transform: rotateZ(-3deg);
-    transition: all ease-in 600ms;
-  }
-  
-  input[type=text] {
+}
+
+.feedback_form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content:flex-start;
+  background-color: $contact_letter;
+  .user_name{
+    align-self: flex-start;
+    width: 30%;
+    margin-left: 5%;
+    margin-top: 2%;
+    outline: none;
     border: none;
-    background-color: rgb(204, 204, 204);
-    border-bottom: 2px solid red;
+    border-bottom: 1px solid #333;
+    background-color: $contact_letter;
+    font-size: 0.9rem;
+    @media only screen and (max-width: $break-sm-width) {
+      font-size:0.8rem;
+      width: 40%;
+    }
+    &:focus{
+      border: none;
+      border-bottom: 2px solid #333;
+    }
   }
-  
-  input[type=text]:focus {
+  .user_email{
+    align-self: flex-start;
+    width: 30%;
+    margin-left: 5%;
+    margin-top: 1%;
+    outline: none;
     border: none;
-    background-color: rgb(204, 204, 204);
-    border-bottom: 2px solid yellow;
+    border-bottom: 1px solid #333;
+    background-color: $contact_letter;
+    font-size: 0.9rem;
+    @media only screen and (max-width: $break-sm-width) {
+      font-size:0.8rem;
+      width: 40%;
+    }
+    &:focus{
+      border: none;
+      border-bottom: 2px solid #333;
+    }
   }
-  
-  .env-top-total{
-    width:50vw;
-    height:40vh;
-    position: relative;
-    top: 20vh;
-    transition-duration: 2s;
-    transition: all ease-out 1000ms;
-    transform-style: preserve-3d;
+  .subject{
+    margin:2% 0;
+    width: 65%;
+    display: flex;
+    flex-direction: row;
+    @media only screen and (max-width: $break-sm-width) {
+      width: 85%;
+    }
+    .subject_label{
+      width: fit-content;
+      font-size: 1rem;
+      @media only screen and (max-width: $break-sm-width) {
+        font-size:0.8rem;
+      }
+    }
+    .user_subject{
+      flex-grow: 1;
+      outline: none;
+      border: none;
+      border-bottom: 1px solid #333;
+      background-color: $contact_letter;
+      font-size: 1rem;
+      @media only screen and (max-width: $break-sm-width) {
+        font-size:0.8rem;
+        width: 100%;
+      }
+    }
   }
-  .env-top{
-    height: 50%;
-    width: 100%;
+  .user_message{
+    width: 70%;
+    height:30%;
+    font-size: 0.9rem;
+    outline: none;
+    border-bottom: 1px solid #333;
+    background-color: $contact_letter;
+    @media only screen and (max-width: $break-sm-width) {
+      font-size:0.8rem;
+    }
   }
-  
-  .env-top-invisible{
-    height:50%;
-    background-color: transparent;
-  }
-  
-  .env-back{
-    width: 50vw;
-    height: 40vh;
+  .send_button{
+    align-self: flex-end;
+    margin-right: 15%;
+    font-size: 1.1rem;
+    width:15%;
+    height: 10%;
+    border: none;
+    color: white;
     background-color: #267b9e;
-    border-radius: 0px 0px 20px 20px;
+    &:hover{
+      font-weight: bold;
+    }
+    @media only screen and (max-width: $break-sm-width) {
+      font-size:0.8rem;
+      width: 20%;
+    }
   }
-  
-  .open-envelop{
-    width: 50vw;
-    height: 40vh;
-    position: relative;
-    top: -40vh;
-    z-index:5;
-  }
-  
-  /* envelop end */
+}
+
+.success_msg{
+  font-size: 2.5rem;
+  font-weight: 640px;
+  color: green;
+  position: absolute;
+}
