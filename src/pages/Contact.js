@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import emailjs from '@emailjs/browser';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {faPaperPlane} from "@fortawesome/free-solid-svg-icons"
+import {faPaperPlane , faCircleCheck} from "@fortawesome/free-solid-svg-icons"
 import { gsap } from "gsap";
 import openEnvelop from '../img/contact/open_envelop_final.png';
 import topEnvelop from '../img/contact/envelop_top_Final.png';
@@ -9,6 +9,7 @@ import topEnvelop from '../img/contact/envelop_top_Final.png';
 const Contacts = () => {
 
     const form = useRef(null);
+    const successRef = useRef(null);
 
     const sendEmail = async (e) => {
         e.preventDefault();
@@ -16,6 +17,7 @@ const Contacts = () => {
         emailjs.sendForm('service_l1y7h1j', 'template_levulc7', form.current, 'dlG0vLmiqkwJtfzi5')
         .then((result) => {
             console.log(result.text);
+            displaySuccess();
         }, (error) => {
             console.log(error.text);
         });
@@ -23,6 +25,18 @@ const Contacts = () => {
         console.log(form.current);
         closeEnvAnimate();
     };
+
+    const displaySuccess = ()=>{
+        if(successRef.current){
+            successRef.current.classList.remove('hide')
+        }
+    }
+
+    const hideSuccess = ()=>{
+        if(successRef.current){
+            successRef.current.classList.add('hide')
+        }
+    }
 
     const resetTheForm = () =>{
         form.current.reset();
@@ -59,15 +73,18 @@ const Contacts = () => {
             translateY:'200%',
             ease: 'power2.out', // Changed from 'transition' to 'ease'
             onComplete: ()=>{
+                hideSuccess();
                 tl.reverse();
             }
         });
     }
 
 
+
     return(
         <>
         <div className='envelop_wrapper'>
+            <div className="success_msg hide" ref={successRef}>Message Sent <FontAwesomeIcon icon={faCircleCheck}/></div>
             <div className="envelop">
                 <img src={topEnvelop} alt='envelop top' className='env_top_side' />
                 <div className="env_body">
