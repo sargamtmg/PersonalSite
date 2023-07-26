@@ -43,6 +43,7 @@
             box-shadow: -2px 4px 8px;
             &.nav_active{
                 display: flex;
+                z-index: 100;
             }
         }
         .nav-li{
