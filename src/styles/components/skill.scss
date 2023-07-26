@@ -35,8 +35,15 @@
     background-color: #333333;
     border-radius: 2.5%;
     border: 3px solid black;
+    overflow-y: hidden;
     @media only screen and (min-width: $break-lg-width) {
         width:60%;
+    }
+    @media only screen and (max-width: $break-sm-width) {
+        width:75%;
+    }
+    @media only screen and (max-width: $break-xsm-width) {
+        width:90%;
     }
     .card_head{
         width:100%;
@@ -75,6 +82,9 @@
                 justify-content: center;
                 width: 90%;
                 height:fit-content;
+                @media only screen and (max-width: $break-xsm-width) {
+                    width:100%;
+                }
             }
         }
     }
@@ -113,6 +123,9 @@
     @media only screen and (max-width: $break-sm-width) {
         width:27%;
     }
+    @media only screen and (max-width: $break-xsm-width) {
+        width:30%;
+    }
 }
 
 .item_card{
@@ -128,6 +141,10 @@
         /*background-color: burlywood;*/
         width: 80%;
         height: 80%;
+        @media only screen and (max-width: $break-sm-width) {
+            width: 87%;
+            height: 87%;
+        }
         .item_logo_and_name{
             width: 90%;
             height: 90%;

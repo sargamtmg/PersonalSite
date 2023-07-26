@@ -29,7 +29,7 @@ const Homepage = () =>{
 
     let aboutMe_data = {
         tittle: 'About Me',
-        content: 'I have experience as a Software Engineer for around year and a half. I have been actively engaged in both backend and frontend development, predominantly utilizing Node.js and React.js technologies. In addition to my primary focus, I have also keen interest in exploring other domains such as machine learning and mobile app development.',
+        content: 'I have approximately a year and a half of experience as a Software Engineer. I have been actively engaged in both backend and frontend development, predominantly utilizing Node.js and React.js technologies. In addition to my primary focus, I have also keen interest in exploring other domains such as machine learning and mobile app development.',
         moreMe: 'Know More About Me '
     }
 
