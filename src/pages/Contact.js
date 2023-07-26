@@ -16,13 +16,13 @@ const Contacts = () => {
     
         emailjs.sendForm('service_l1y7h1j', 'template_levulc7', form.current, 'dlG0vLmiqkwJtfzi5')
         .then((result) => {
-            console.log(result.text);
+            //console.log(result.text);
             displaySuccess();
         }, (error) => {
-            console.log(error.text);
+            //console.log(error.text);
         });
 
-        console.log(form.current);
+        //console.log(form.current);
         closeEnvAnimate();
     };
 
@@ -43,7 +43,7 @@ const Contacts = () => {
     }
 
     function closeEnvAnimate() {
-        console.log('closing animation');
+        //console.log('closing animation');
         const tl = gsap.timeline();
 
         tl.to('.envelop', {

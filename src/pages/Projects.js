@@ -11,6 +11,7 @@ import {gsap} from 'gsap';
 import wall_texture from '../img/project/hd_wall2.jpg';
 import intercodeImg from '../img/project/intercode.png';
 import textRecogImg from '../img/project/text_recog.jpg';
+import cityeventImg from '../img/project/cityevent.jpg';
 
 const Projects = () => {
 
@@ -63,12 +64,12 @@ const Projects = () => {
         },
         undefined,
         (err)=>{
-            console.log('error on modling model err:'+err);
+            //console.log('error on modling model err:'+err);
         });
     }
 
     useEffect(()=>{
-        console.log('useeffect in');
+        //console.log('useeffect in');
         rendererRef.current = new THREE.WebGLRenderer();
         rendererRef.current.setSize(canvasRef.current.clientWidth, canvasRef.current.clientHeight);
 
@@ -86,8 +87,9 @@ const Projects = () => {
         
         let intercodeTexture = new THREE.TextureLoader().load(intercodeImg);
         let textRecogTexture = new THREE.TextureLoader().load(textRecogImg);
+        let cityeventTexture = new THREE.TextureLoader().load(cityeventImg);
 
-        const image_plane_geo = new THREE.PlaneGeometry(4.5,7);
+        const image_plane_geo = new THREE.PlaneGeometry(4.5,7.2);
         const mat_img = new THREE.MeshStandardMaterial({color:'#ffffff',map:intercodeTexture});
         img1.current = new THREE.Mesh(image_plane_geo,mat_img);
         img1.current.position.set(-10,2,0.4);
@@ -95,7 +97,7 @@ const Projects = () => {
         img1.current.userData.name = 'intercode';
         sceneRef.current.add(img1.current);
 
-        const image_plane_geo2 = new THREE.PlaneGeometry(4.5,7);
+        const image_plane_geo2 = new THREE.PlaneGeometry(4.5,7.2);
         const mat_img2 = new THREE.MeshStandardMaterial({color:'#ffffff',map:textRecogTexture});
         img2.current = new THREE.Mesh(image_plane_geo2,mat_img2);
         img2.current.position.set(0,2,0.4);
@@ -103,8 +105,8 @@ const Projects = () => {
         img2.current.userData.name = 'text_recog';
         sceneRef.current.add(img2.current);
 
-        const image_plane_geo3 = new THREE.PlaneGeometry(3,3);
-        const mat_img3 = new THREE.MeshStandardMaterial({color:'#ffffff',map:texture});
+        const image_plane_geo3 = new THREE.PlaneGeometry(4.5,7.2);
+        const mat_img3 = new THREE.MeshStandardMaterial({color:'#ffffff',map:cityeventTexture});
         img3.current = new THREE.Mesh(image_plane_geo3,mat_img3);
         img3.current.position.set(10,2,0.4);
         img3.current.name='image_frame';
@@ -180,7 +182,7 @@ const Projects = () => {
             await loadPictureFrame(img1);
             await loadPictureFrame(img2);
             await loadPictureFrame(img3);
-            console.log('loading loop complete');
+            //console.log('loading loop complete');
         }
         if(!isAssetloaderAsyncExecutedRef.current){
             loadmodels();
@@ -212,6 +214,9 @@ const Projects = () => {
 
         const canvasMount = canvasRef.current;
 
+        const navChild = document.querySelector('.navChild');
+        navChild.classList.add('stickyToTop');
+
         return ()=>{
             if(canvasMount){
                 canvasMount.removeChild(rendererRef.current.domElement);
@@ -236,11 +241,11 @@ const Projects = () => {
         if(!isModalOpen){
             // const canvas = document.getElementById('demo');
             // const dim = canvas.getBoundingClientRect();
-            // console.log(dim.top);
+            //console.log(dim.top);
             pointer.x = ( (event.clientX-rendererRef.current.domElement.offsetLeft) / rendererRef.current.domElement.width ) * 2 - 1;
             pointer.y = - ( (event.clientY-rendererRef.current.domElement.offsetTop) / rendererRef.current.domElement.height ) * 2 + 1;
-            console.log(event.clientY);
-            console.log(window.innerHeight);
+            //console.log(event.clientY);
+            //console.log(window.innerHeight);
         
             // update the picking ray with the camera and pointer position
             raycaster.setFromCamera( pointer, cameraRef.current );
@@ -250,12 +255,12 @@ const Projects = () => {
             //const intersects = raycaster.intersectObject(Object.values(loadedModels),true);
             if(intersects.length){
                 for(let i=0;i<intersects.length;i++){
-                    console.log(intersects.length);
+                    //console.log(intersects.length);
                     if(intersects[i].object.name==='image_frame'){
                         //intersects[i].object.material.color.set(0x267070);
                         const obj = intersects[i].object;
                         selectedObjRef.current=obj;
-                        console.log('project name: '+selectedObjRef.current.userData.name)
+                        //console.log('project name: '+selectedObjRef.current.userData.name)
                         initialSelectedPosRef.current = selectedObjRef.current.position.clone();
                         let camerapos = cameraRef.current.position.clone();
 
@@ -283,13 +288,13 @@ const Projects = () => {
     }
 
     const openModal = ()=>{
-        console.log('modal should be open');
+        //console.log('modal should be open');
         setisModalOpen(true);
         orbitRef.current.enabled = false;
     }
     
     const closeModal = () =>{
-        console.log('modal should be close');
+        //console.log('modal should be close');
         setisModalOpen(false);
         if(selectedObjRef.current && initialSelectedPosRef.current)
         {

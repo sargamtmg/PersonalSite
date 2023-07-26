@@ -68,7 +68,7 @@ const About_me = () => {
                 },
                 undefined,
                 (err)=>{
-                    console.log('error on modling model err:'+err);
+                    //console.log('error on modling model err:'+err);
                 });
                 isAssetloaderAsyncExecutedRef.current = true;   // Since useeffect run twice, it prevent this async run to run twice
             }
@@ -134,7 +134,7 @@ const About_me = () => {
     window.addEventListener("resize",()=>{
         if(renderer.current && canvas_mountRef.current){
             renderer.current.setSize(canvas_mountRef.current.clientWidth,canvas_mountRef.current.clientHeight);
-            console.log('renderer size updated');
+            //console.log('renderer size updated');
         }
     });
 
@@ -197,7 +197,7 @@ const About_me = () => {
                     model.current.scale.x+=0.2;
                     model.current.scale.y+=0.2;
                     model.current.scale.z+=0.2;
-                    console.log(model.current.scale.x);
+                    //console.log(model.current.scale.x);
                 }
                 //console.log(model.current.position.x);
             },15);
@@ -242,7 +242,7 @@ const About_me = () => {
             },
             undefined,
             (err)=>{
-                console.log('error on modling model err:'+err);
+                //console.log('error on modling model err:'+err);
             });
         }else{
             modelUrl = new URL('../assets/home_office.glb',import.meta.url);
@@ -262,7 +262,7 @@ const About_me = () => {
             },
             undefined,
             (err)=>{
-                console.log('error on modling model err:'+err);
+                //console.log('error on modling model err:'+err);
             });
         }
         //await moving_in_animation();

@@ -63,8 +63,8 @@ const Homepage = () =>{
     useEffect(()=>{
         //console.log('useEffect on main page');
         if( letterT_Ref.current && letterT_Ref.current.offsetParent){
-            console.log('letter T width: '+letterT_Ref.current.offsetWidth);
-            console.log('letter T width 2: '+letterT_middleline_Ref.current.clientWidth);
+            //console.log('letter T width: '+letterT_Ref.current.offsetWidth);
+            //console.log('letter T width 2: '+letterT_middleline_Ref.current.clientWidth);
             let ctx = gsap.context(()=>{
 
                 //initial setting height for letterT
@@ -188,7 +188,11 @@ const Homepage = () =>{
                 });
 
             });
-            return () => ctx.revert();
+            return () =>{
+                ctx.revert();
+                const navChild = document.querySelector('.navChild');
+                navChild.classList.add('stickyToTop');
+            }
         }
         
     },[]);

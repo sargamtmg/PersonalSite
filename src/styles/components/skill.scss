@@ -4,6 +4,7 @@
     justify-content: center;
     align-items: center;
     width: 100%;
+    background-color: $skill_page_bg;
 }
 
 .skill_card_wrapper{
@@ -34,9 +35,9 @@
     background-color: #333333;
     border-radius: 2.5%;
     border: 3px solid black;
-        @media only screen and (min-width: $break-lg-width) {
-            width:60%;
-        }
+    @media only screen and (min-width: $break-lg-width) {
+        width:60%;
+    }
     .card_head{
         width:100%;
         height: 20%;
@@ -75,6 +76,30 @@
                 width: 90%;
                 height:fit-content;
             }
+        }
+    }
+}
+
+.card_softskill_lists{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    width: 70%;
+    height:fit-content;
+    @media only screen and (max-width: $break-xsm-width) {
+        width:80%;
+    }
+    .softskill_item{
+        padding: 1.5%;
+        margin-top: 3%;
+        box-shadow: 2px 3px 5px black;
+        border-radius: 5px;
+        color: white;
+        font-size: 1rem;
+        @media only screen and (max-width: $break-sm-width) {
+            font: size 0.9rem;
+            padding:1%;
         }
     }
 }

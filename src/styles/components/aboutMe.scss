@@ -1,6 +1,7 @@
 .about_me_wrapper{
     display: flex;
     flex-direction: column;
+    background-color: $about_me_page_bg;
 }
 .aboutme_edu_exp{
     width: 100%;

@@ -4,6 +4,7 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 import {motion} from 'framer-motion';
 import scrollDown from '../img/logo/scroll_down.png';
 import SkillCard from './page_components/SkillCard';
+import SoftSkillCard from './page_components/SoftSkillCard';
 import HTML_logo from '../img/skill/HTML.png';
 import CSS_logo from '../img/skill/CSS.png';
 import Sass_logo from '../img/skill/Sass.png';
@@ -19,6 +20,7 @@ import Java_logo from '../img/skill/Java.png';
 import Three_logo from '../img/skill/Three.png';
 import Jest_logo from '../img/skill/Jest.png';
 import VSCode_logo from '../img/skill/VSCode.png';
+import Postman_logo from '../img/skill/postman.png'
 
 
 const Skill = () => {
@@ -40,7 +42,7 @@ const Skill = () => {
                 trigger: '.card3_section',
                 start: 'top 100%',
                 end: 'top 7%',
-                markers:true,
+                //markers:true,
                 scrub: true,
                 toggleActions: 'play pause reverse none',
             }
@@ -149,9 +151,25 @@ const Skill = () => {
             {
                 img_url:VSCode_logo,
                 name:'VS Code'
+            },
+            {
+                img_url:Postman_logo,
+                name:'Postman'
             }
             ]
         },
+    ];
+    const softskill_list = [
+        {
+        heading:'',
+        lists:[
+            'Communication',
+            'Collaborations',
+            'Effective time management',
+            'Acquaintance with Agile principles and practices',
+            'familiar with Jira for project management'
+            ]
+        }
     ];
 
     window.addEventListener('scroll', ()=>{
@@ -170,17 +188,17 @@ const Skill = () => {
             className="skill_wrapper"
             initial={{ opacity: 0}}
             animate={{ opacity: 1}}
-            transition={{ delay:0.5, duration: 1 }}
+            transition={{ duration: 0.5 }}
             >
             <div className={window.scrollY===0 ? 'scrolldown':'scrolldown hide'}><img src={scrollDown} alt="scroll down" width='15%'></img></div>
             <div className="card1_section">
                 <SkillCard list={skill_list} card_heading='Professional Skills' identifier='card1'/>
             </div>
             <div className="card2_section">
-                <SkillCard list={Programming_list} card_heading='Other Skills' identifier='card2'/>
+                <SkillCard list={Programming_list} card_heading='Some More Skills' identifier='card2'/>
             </div>
             <div className="card3_section">
-                <SkillCard list={Programming_list} card_heading='Other Skills' identifier='card3'/>
+                <SoftSkillCard list={softskill_list} card_heading='Soft Skills' identifier='card3'/>
             </div>
         </motion.div>
     );

@@ -1,4 +1,4 @@
-import React,{useRef} from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import ScrollToTop from './pages/page_components/ScrollToTop';
 import Nav from './navigation';
