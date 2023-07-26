@@ -1,6 +1,9 @@
 
 .project_canvas{
     display: block;
+    width:100vw;
+    height:90vh;
+    cursor: pointer;
     @media only screen and (max-width: $break-sm-width){
         display: none;
     }
@@ -10,22 +13,22 @@
     bottom: 0;
     right:0;
     height:90%;
-    width: 70%;
+    width: 55%;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: cadetblue;
+    background-color: $project_model;
     .modal_content_wrapper{
-        width:90%;
+        width:85%;
         height: 80%;
-        background-color: antiquewhite;
         .cross{
-            width: 10%;
-            height: 10%;
+            width: 7%;
+            height: 7%;
             position: absolute;
-            right: 2%;
+            right: 10%;
             top:2%;
-            background-color: blanchedalmond;
+            cursor: pointer;
+            background-color: #ececec;
         }
     }
 }
@@ -41,8 +44,11 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        width: 100%;
-        margin-top: 5%;
+        width: 85%;
+        margin-top: 10%;
+        @media only screen and (max-width: $break-xsm-width){
+            width: 90%;
+        }
         .project_image_mobile{
             width: 30%;
             background-color: aquamarine;
@@ -51,4 +57,78 @@
             }
         }
     }
+}
+
+//project Text Recog
+.text_recog_wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    overflow-y: scroll;
+    width: 100%;
+    height: 100%;
+    padding-right: 2%;
+    &::-webkit-scrollbar{
+        width: 0.8vw;
+        max-width: 10px;
+    }
+    &::-webkit-scrollbar-thumb{
+        background-color: $orange-color;
+        border-radius: 0.5vw;
+    }
+    
+    &::-webkit-scrollbar-track{
+        background-color: $scrollbar_track_color;
+    }
+    @media only screen and (max-width: $break-sm-width){
+        overflow-y: visible;
+        height: auto;
+        padding-left: 0;
+    }
+    .subsec_wrapper{
+        .textrecog_title{
+            font-size: 2rem;
+            font-weight: 550;
+            color: blue;
+            @media only screen and (max-width: $break-tab-port-width){
+                font-size:1.7rem;
+            }
+            @media only screen and (max-width: $break-xsm-width){
+                font-size: 1.4;
+            }
+        }
+        .textrecog_content{
+            font-size: 1.1rem;
+            line-height: 1.5rem;
+            @media only screen and (max-width: $break-tab-port-width){
+                font-size:1rem;
+                line-height: 1.3rem;
+            }
+            @media only screen and (max-width: $break-xsm-width){
+                font-size: 0.9;
+            }
+        }
+    }
+}
+.project_title{
+    font-size: 2.8rem;
+    font-weight: bold;
+    align-self: center;
+    margin-bottom: 5%;
+    @media only screen and (max-width: $break-tab-port-width){
+        font-size:2.5rem;
+    }
+    @media only screen and (max-width: $break-xsm-width){
+        font-size: 2rem;
+    }
+}
+
+.result_demo{
+    width:100%;
+    margin-top: 5%;
+}
+
+.horizontal_break_project{
+    width: 100%;
+    color: black;
 }

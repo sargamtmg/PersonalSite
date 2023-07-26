@@ -40,9 +40,6 @@ const Nav = (props) =>{
                 <li className="nav-li">
                     <NavLink to='/projects' className="navList" activeclassname="active" onClick={toggleIsNavOpen}>Projects</NavLink>
                 </li>
-                <li className="nav-li">
-                    <NavLink to='/hobby' className="navList" activeclassname="active" onClick={toggleIsNavOpen}>Hobby</NavLink>
-                </li>
                 {props.gameInclude &&
                 <li className="nav-li">
                     <NavLink to='/game' className="navList" activeclassname="active" onClick={toggleIsNavOpen}>Game</NavLink>

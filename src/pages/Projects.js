@@ -70,7 +70,7 @@ const Projects = () => {
     useEffect(()=>{
         console.log('useeffect in');
         rendererRef.current = new THREE.WebGLRenderer();
-        rendererRef.current.setSize(window.innerWidth, window.innerHeight);
+        rendererRef.current.setSize(canvasRef.current.clientWidth, canvasRef.current.clientHeight);
 
 
         sceneRef.current = new THREE.Scene();
@@ -116,8 +116,8 @@ const Projects = () => {
         spotLight.position.set( -10, -24, 3 );
         spotLight.target = img1.current;
 
-        const spotHelper = new THREE.SpotLightHelper(spotLight,0xff00ff);
-        sceneRef.current.add(spotHelper);
+        // const spotHelper = new THREE.SpotLightHelper(spotLight,0xff00ff);
+        // sceneRef.current.add(spotHelper);
 
         const spotLight2 = new THREE.SpotLight(0xffffff,1.4,0,0.2,0.2,0);
         sceneRef.current.add(spotLight2);
@@ -189,6 +189,8 @@ const Projects = () => {
 
         cameraRef.current = new THREE.PerspectiveCamera(65,window.innerWidth/ window.innerHeight);
         orbitRef.current = new OrbitControls(cameraRef.current, rendererRef.current.domElement);
+        orbitRef.current.enableZoom = false;
+        orbitRef.current.enableRotate = false;
 
         cameraRef.current.position.set(0,0,20);
         orbitRef.current.update();
@@ -219,8 +221,14 @@ const Projects = () => {
     },[]);
 
     const resizeRenderer = ()=>{
-        if(rendererRef.current){
-            rendererRef.current.setSize(window.innerWidth, window.innerHeight);
+        let newWidth = canvasRef.current.clientWidth;
+        let newHeight = canvasRef.current.clientHeight;
+        if(rendererRef.current && cameraRef.current){
+            rendererRef.current.setSize(newWidth, newHeight);
+
+            // Update camera aspect ratio
+            cameraRef.current.aspect = newWidth / newHeight;
+            cameraRef.current.updateProjectionMatrix();
         }
     }
 
@@ -254,11 +262,11 @@ const Projects = () => {
                         //console.log('end camera quaternion + '+camera.x+' '+camera.y+' '+camera.z+''+camera.w);
                         gsap.to(selectedObjRef.current.position,{
                             duration: 0.6,
-                            x:camerapos.x-5,
-                            y: camerapos.y+1,
-                            z:camerapos.z-7,
+                            x:camerapos.x-4,
+                            y: camerapos.y,
+                            z:camerapos.z-10,
                             onUpdate: ()=>{
-                                selectedObjRef.current.lookAt(camerapos.x-5,camerapos.y+1,camerapos.z-2);
+                                selectedObjRef.current.lookAt(camerapos.x-4,camerapos.y,camerapos.z-2);
                             },
                             onComplete: ()=>{
                                 openModal();
@@ -315,6 +323,7 @@ const Projects = () => {
                       <div key={data.name} className="project_detail">
                         <img className="project_image_mobile" src={data.image} alt={data.name} />
                         <ProjectSelector className="project_contain" project_name={data.name} />
+                        <hr className="horizontal_break_project"/>
                       </div>
                     ))
                 }

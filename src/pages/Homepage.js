@@ -247,13 +247,7 @@ const Homepage = () =>{
 
     return(
         <>
-        <motion.div 
-        className='view1'
-        initial={{opacity:0.2}}
-        animate={{opacity:1}}
-        exit={{opacity:1}}
-        transition={{duration:1}}
-        >
+        <div className='view1'>
             <div className='hero_layer layer' id='heroid' ref ={heroLayerRef}>
                 <div className='introduction'>
                     <div className='intro_name'>{intro_data.name}</div>
@@ -284,7 +278,7 @@ const Homepage = () =>{
             </div>
             <div className='trans layer' id='transid' ref ={myref3}>
             </div>
-        </motion.div>
+        </div>
             <div className='view2'>
                 <div className='purple layer'>  
                     <div className='whole_collection'>
