@@ -41,7 +41,7 @@ const Projects = () => {
         },
         {
             name:'city_event',
-            image: textRecogImg
+            image: cityeventImg
         }
     ];
 
