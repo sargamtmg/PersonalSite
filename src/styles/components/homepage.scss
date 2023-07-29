@@ -94,7 +94,8 @@
     right:5vw;
     bottom:0;
     background-image: url("../../img/homepage/profile_b&w.png"); //set aspect ratio to 8:10
-    background-size: cover;
+    background-size: contain;
+    background-repeat: no-repeat;
     background-position : top center;
     @media only screen and (max-width: $break-lg-width){
       width: 45%;
