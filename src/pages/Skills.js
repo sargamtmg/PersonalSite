@@ -15,7 +15,7 @@ import JS_logo from '../img/skill/JS.png';
 import AWS_logo from '../img/skill/AWS.png';
 import MongoDB_logo from '../img/skill/mongoDB.png';
 import MySQL_logo from '../img/skill/mySQL.png';
-import Cpp_logo from '../img/skill/C++.png';
+import Cpp_logo from '../img/skill/Cpp.png';
 import Java_logo from '../img/skill/Java.png';
 import Three_logo from '../img/skill/Three.png';
 import Jest_logo from '../img/skill/Jest.png';
