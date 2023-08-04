@@ -211,7 +211,7 @@ const About_me = () => {
 
     const func_animate = async()=>{
 
-        disableScroll();
+        //disableScroll();
 
         await moving_out_animation();
 
@@ -231,13 +231,13 @@ const About_me = () => {
                     model.current.name = 'graduation';
                     //model.current.scale.set(3,3,3);
                     model.current.scale.set(0,0,0);
-                    window.scrollBy({
-                        top: -window.innerHeight * 0.3,
-                        behavior: "smooth"
-                    });
+                    // window.scrollBy({
+                    //     top: -window.innerHeight * 0.3,
+                    //     behavior: "smooth"
+                    // });
                     await moving_in_animation();
                     model.current.scale.set(4.5,4.5,4.5);
-                    enableScroll();
+                    //enableScroll();
                 }
             },
             undefined,
@@ -252,13 +252,13 @@ const About_me = () => {
                 model.current.name = 'home_office';
                 //model.current.scale.set(4.5,4.5,4.5);
                 model.current.scale.set(0,0,0);
-                window.scrollBy({
-                    top: window.innerHeight * 0.6,
-                    behavior: "smooth"
-                });
+                // window.scrollBy({
+                //     top: window.innerHeight * 0.6,
+                //     behavior: "smooth"
+                // });
                 await moving_in_animation();
                 model.current.scale.set(4,4,4);
-                enableScroll();
+                //enableScroll();
             },
             undefined,
             (err)=>{
