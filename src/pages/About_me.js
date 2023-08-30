@@ -170,13 +170,13 @@ const About_me = () => {
             rotateBackTween = gsap.to(model.current.rotation, {
                 x: 0,
                 y: 0,
-                duration: 2.5,
+                duration: 2,
                 ease: 'power2.out',
-                onUpdate: () => {
-                    // Apply the updated rotation values to the model during the tween
-                    model.current.rotation.y = currentRotation.y;
-                    model.current.rotation.x = currentRotation.x;
-                },
+                // onUpdate: () => {
+                //     // Apply the updated rotation values to the model during the tween
+                //     model.current.rotation.y = 0;
+                //     model.current.rotation.x = 0;
+                // },
             });
         }
     }
