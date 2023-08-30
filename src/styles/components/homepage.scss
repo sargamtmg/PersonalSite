@@ -20,7 +20,7 @@
     //background-color:darkslategrey;
     align-self: flex-start;
     position: relative;
-    left:5vw;
+    left:10vw;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -37,9 +37,15 @@
       left:5%;
     }
     .intro_name{
-      font-size: 3.2rem;
+      font-size: 3.7rem;
       color: white;
       font-weight: bold;
+      @media only screen and (max-width: $break-lg-width){
+        font-size:3.6rem;
+      }
+      @media only screen and (max-width: $break-md-width){
+        font-size:3.4rem;
+      }
       @media only screen and (max-width: $break-sm-width){
         font-size:1.8rem;
       }
@@ -91,7 +97,7 @@
     align-items: center;
     justify-content: flex-end; // for resume button
     position:absolute;
-    right:5vw;
+    right:10vw;
     bottom:0;
     background-image: url("../../img/homepage/profile_b&w.png"); //set aspect ratio to 8:10
     background-size: contain;
