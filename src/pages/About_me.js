@@ -1,4 +1,4 @@
-import React, { useEffect, useRef} from "react";
+import React, { useEffect, useRef, useState} from "react";
 import * as THREE from 'three';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls'
 import {addAxis, addDirectionallightFromFourDir} from '../utilities/helper'
@@ -7,6 +7,8 @@ import {gsap} from 'gsap';
 import ScrollTrigger from "gsap/ScrollTrigger";
 
 const About_me = () => {
+
+    const [isLoading,setIsLoading] = useState(false);
 
     const isAssetloaderAsyncExecutedRef = useRef(false); //to ensure assetloader load sync func to execute once in strictmode too
     const canvas_wrapperRef = useRef(null);
@@ -36,9 +38,11 @@ const About_me = () => {
             renderer.current = new THREE.WebGLRenderer({ alpha: true });
             renderer.current.setClearColor( 0x000000, 0 );
 
-            canvas_mountRef.current.appendChild(renderer.current.domElement);
-            renderer.current.setSize(canvas_mountRef.current.clientWidth,canvas_mountRef.current.clientHeight);
-            renderer.current.setPixelRatio(window.devicePixelRatio);
+            if(canvas_mountRef.current){
+                canvas_mountRef.current.appendChild(renderer.current.domElement);
+                renderer.current.setSize(canvas_mountRef.current.clientWidth,canvas_mountRef.current.clientHeight);
+                renderer.current.setPixelRatio(window.devicePixelRatio);
+            }
 
             scene.current = new THREE.Scene();
 
@@ -47,7 +51,7 @@ const About_me = () => {
             const controls = new OrbitControls(camera,renderer.current.domElement);
             controls.enableZoom= false;
             controls.enableRotate = false;
-            camera.position.set(0,4.5,9);
+            camera.position.set(-2.2,5,8.5);
             controls.update();
 
             scene.current.add(new THREE.DirectionalLight(0xFFFFFF,1));
@@ -138,10 +142,11 @@ const About_me = () => {
         }
     });
 
-    // Register the mousemove event
+    //Register the mousemove event
     document.addEventListener('mousemove', onMouseMove, false);
 
     let rotateBackTween = null;
+    let currentRotation = { x: 0, y: 0 }; // Store the current rotation values
     // Function to handle the mousemove event
     function onMouseMove(event) {
         const deltaX = event.movementX || event.mozMovementX || event.webkitMovementX || 0;
@@ -149,8 +154,13 @@ const About_me = () => {
     
         const sensitivity = 0.002;
         if(model.current){
-            model.current.rotation.y += deltaX * sensitivity -deltaY * sensitivity;
-            model.current.rotation.x += deltaY * sensitivity * 0.7;
+            // Update the current rotation values based on mouse movement
+            currentRotation.y += deltaX * sensitivity - deltaY * sensitivity;
+            currentRotation.x += deltaY * sensitivity * 0.7;
+
+            // Apply the updated rotation values to the model
+            model.current.rotation.y = currentRotation.y;
+            model.current.rotation.x = currentRotation.x;
         }
 
         if (rotateBackTween) {
@@ -162,9 +172,15 @@ const About_me = () => {
                 y: 0,
                 duration: 2.5,
                 ease: 'power2.out',
+                onUpdate: () => {
+                    // Apply the updated rotation values to the model during the tween
+                    model.current.rotation.y = currentRotation.y;
+                    model.current.rotation.x = currentRotation.x;
+                },
             });
         }
     }
+
 
     // Disable scroll
     function disableScroll() {
@@ -219,6 +235,9 @@ const About_me = () => {
         let first_model_name;
         if(model.current){
             first_model_name = model.current.name;
+            if(first_model_name === 'graduation'){ //show loader picture (ie. home office) only when transition from graduation to homeoffice
+                setIsLoading(true);
+            }
             scene.current.remove(model.current);
         }
         let modelUrl;
@@ -256,8 +275,9 @@ const About_me = () => {
                 //     top: window.innerHeight * 0.6,
                 //     behavior: "smooth"
                 // });
-                await moving_in_animation();
+                //await moving_in_animation();
                 model.current.scale.set(4,4,4);
+                setIsLoading(false);
                 //enableScroll();
             },
             undefined,
@@ -272,7 +292,11 @@ const About_me = () => {
         <div className="about_me_wrapper">
             <div className='aboutme_edu_exp'>
                 <div className="canvas_wrapper" ref={canvas_wrapperRef}>
+                    {
+                    isLoading ?
+                    <div className="loader_about_me"></div>:
                     <div id='gamecanvas' className="gamecanvas" ref={canvas_mountRef}></div>
+                    }
                 </div>
                 <div className="aboutme_detail">
                     <div className="aboutme_section_wrapper">
