@@ -5,6 +5,11 @@ import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls'
 import {addAxis, addGrid} from '../utilities/helper'
 import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader' 
 
+// IMPORTANT:
+// I have change many asset and just set with any asset with less resolution to avoid high size.
+// Please search for asset again or look in computer download or somewhere.
+
+
 //use of set to avoid model load at same location which also prevent from multiple loading -
 //of same model in same place which make less add of models causing better performance cause scene has less models.
 const occupiedLocation = new Set();
